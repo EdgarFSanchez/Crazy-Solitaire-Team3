@@ -181,6 +181,7 @@ public class Card {
     public void FlipOver() {
         FaceUp = !FaceUp;
         PicBox.BackgroundImage = PicImg;
+        ScoreManager.AddPoints(5);
     }
 
     public void AdjustLocation(int left, int top) {
@@ -237,6 +238,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         c.PicBox.BringToFront();
         Panel.Refresh();
         c.PicBox.BringToFront();
+        ScoreManager.AddPoints(50);
     }
 
     public void DragEnded() {
@@ -332,6 +334,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
         Panel.AddCard(c);
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
+        ScoreManager.AddPoints(100);
     }
 
     public void DragEnded() {
