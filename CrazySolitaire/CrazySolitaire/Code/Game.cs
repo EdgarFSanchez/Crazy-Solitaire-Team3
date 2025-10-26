@@ -83,6 +83,7 @@ public class Card {
     public CardType Type { get; private set; }
     public Suit Suit { get; private set; }
     public bool FaceUp { get; private set; }
+    public bool HasScoredInFoundation { get; set; } = false;
     public PictureBox PicBox { get; private set; }
     public Bitmap PicImg {
         get => FaceUp ? Resources.ResourceManager.GetObject($"{Type.ToString().Replace("_", "").ToLower()}_of_{Suit.ToString().ToLower()}") as Bitmap
@@ -234,11 +235,21 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         Cards.AddLast(c);
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
+
+        if (FrmGame.CardDraggedFrom is FoundationStack)
+        {
+            ScoreManager.SubtractPoints(20);    // moving from foundation = penalty
+        }
+        else
+        {
+            ScoreManager.AddPoints(10);         // normal tableau move = reward
+        }
+
         c.AdjustLocation(0, (Cards.Count - 1) * 20);
         c.PicBox.BringToFront();
         Panel.Refresh();
         c.PicBox.BringToFront();
-        ScoreManager.AddPoints(50);
+
     }
 
     public void DragEnded() {
@@ -332,9 +343,9 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom {
         Cards.Push(c);
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
+        ScoreManager.AddPoints(20);
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
-        ScoreManager.AddPoints(100);
     }
 
     public void DragEnded() {
