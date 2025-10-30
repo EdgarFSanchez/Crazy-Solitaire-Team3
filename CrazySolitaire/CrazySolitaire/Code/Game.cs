@@ -236,13 +236,9 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom {
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
 
-        if (FrmGame.CardDraggedFrom is FoundationStack)
-        {
-            ScoreManager.SubtractPoints(20);    // moving from foundation = penalty
-        }
-        else
-        {
-            ScoreManager.AddPoints(10);         // normal tableau move = reward
+        if (FrmGame.CardDraggedFrom is Talon)
+        { 
+            ScoreManager.AddPoints(10);         
         }
 
         c.AdjustLocation(0, (Cards.Count - 1) * 20);
