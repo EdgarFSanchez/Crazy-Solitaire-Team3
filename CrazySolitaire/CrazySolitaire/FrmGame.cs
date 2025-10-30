@@ -1,15 +1,20 @@
 using CrazySolitaire.Properties;
 
-namespace CrazySolitaire {
+namespace CrazySolitaire
+{
     public partial class FrmGame : Form
     {
-        public static Card CurDragCard { get; private set; }
-        public static IDragFrom CardDraggedFrom { get; private set; }
+        public static LinkedList<Card> CurDragCards { get; private set; } = new();
+        public static IDragFrom CardsDraggedFrom { get; private set; }
         public static FrmGame Instance { get; private set; }
         private System.Windows.Forms.Timer doublePointsTimer;           // timer to count down duration
         private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
 
 
+        protected override CreateParams CreateParams
+        {
+            get
+            {
         protected override CreateParams CreateParams
         {
             get
@@ -22,17 +27,25 @@ namespace CrazySolitaire {
 
         public FrmGame()
         {
+        public FrmGame()
+        {
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
         private void Form1_Load(object sender, EventArgs e)
         {
             Instance = this;
             Panel[] panTableauStacks = new Panel[7];
             for (int i = 0; i < 7; i++)
             {
+            for (int i = 0; i < 7; i++)
+            {
                 panTableauStacks[i] = (Panel)Controls.Find($"panTableauStack_{i}", false)[0];
             }
+            Dictionary<Suit, Panel> panFoundationStacks = new()
+            {
             Dictionary<Suit, Panel> panFoundationStacks = new()
             {
                 [Suit.DIAMONDS] = panFoundationStack_Diamonds,
@@ -61,7 +74,13 @@ namespace CrazySolitaire {
         {
             if (pbStock.BackgroundImage is null)
             {
+        private void pbStock_Click(object sender, EventArgs e)
+        {
+            if (pbStock.BackgroundImage is null)
+            {
                 Game.StockReloadCount++;
+                if (Game.StockReloadCount > 3)
+                {
                 if (Game.StockReloadCount > 3)
                 {
                     Game.Explode();
@@ -72,7 +91,11 @@ namespace CrazySolitaire {
                 }
                 else
                 {
+                else
+                {
                     Game.Talon.ReleaseIntoDeck(Game.Deck);
+                    pbStock.BackgroundImage = Game.StockReloadCount switch
+                    {
                     pbStock.BackgroundImage = Game.StockReloadCount switch
                     {
                         1 => Resources.back_green,
@@ -85,7 +108,13 @@ namespace CrazySolitaire {
             {
                 for (int i = 0; i < 3; i++)
                 {
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
                     Card c = Game.Deck.Acquire();
+                    if (c != null)
+                    {
                     if (c != null)
                     {
                         Game.Talon.AddCard(c);
@@ -95,6 +124,8 @@ namespace CrazySolitaire {
                 }
                 if (Game.Deck.IsEmpty())
                 {
+                if (Game.Deck.IsEmpty())
+                {
                     pbStock.BackgroundImage = null;
                 }
             }
@@ -102,16 +133,18 @@ namespace CrazySolitaire {
 
         public static void DragCard(Card c)
         {
-            CurDragCard = c;
-            CardDraggedFrom = Game.FindDragFrom(c);
+            CurDragCards.AddLast(c);
+            CardsDraggedFrom = Game.FindDragFrom(c);
         }
         public static void StopDragCard(Card c)
         {
-            if (CurDragCard == c)
-                CurDragCard = null;
+            if (CurDragCards.Contains(c))
+                CurDragCards.Clear();
         }
-        public static bool IsDraggingCard(Card c) => CurDragCard == c;
+        public static bool IsDraggingCard(Card c) => CurDragCards.Contains(c);
 
+        private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
+        {
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
         {
             Game.TitleForm.Close();
