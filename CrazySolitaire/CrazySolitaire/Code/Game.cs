@@ -1,4 +1,5 @@
 ﻿using CrazySolitaire.Properties;
+using System;
 using Timer = System.Windows.Forms.Timer;
 
 namespace CrazySolitaire;
@@ -141,7 +142,7 @@ public class Card
         };
 
         PicBox.MouseDown += (sender, e) => {
-            if (e.Button == MouseButtons.Left && Game.IsCardMovable(this))
+             if (e.Button == MouseButtons.Left && Game.IsCardMovable(this))
             {
                 //changed to handle dragging multiple valid cards
                 //if in a tableau stack
@@ -150,36 +151,22 @@ public class Card
                     //a list of all the cards that are draggable
                     List<Card> movables = this.IsIn.FindMoveableCards();
                     //find the point in the stack that is being dragged
-                    int count = movables.IndexOf(this) + 1;
-                    int count2 = movables.IndexOf(this) + 1;
+                    int index = movables.IndexOf(this);
+
                     //drag all the other cards
-                    while (count <= movables.Count)
+                    while (index < movables.Count)
                     {
-                        FrmGame.DragCard(movables[count - 1]);
-                        movables[count - 1].dragOffset = e.Location;
-                        movables[count - 1].conBeforeDrag = PicBox.Parent;
-                        movables[count - 1].relLocBeforeDrag = movables[count-1].PicBox.Location;
-                        conBeforeDrag.RemCard(movables[count - 1]);
-                        FrmGame.Instance.AddCard(movables[count - 1]);
-                        Point loc = e.Location;
-                        movables[count - 1].PicBox.Location = new Point(loc.X, loc.Y + ((movables.Count % count) * 20));
-                        movables[count - 1].PicBox.BringToFront();
-                        count++;
+                        FrmGame.DragCard(movables[index]);
+                        movables[index].dragOffset = e.Location;
+                        movables[index].conBeforeDrag = movables[index].PicBox.Parent;
+                        movables[index].relLocBeforeDrag = movables[index].PicBox.Location;
+                        conBeforeDrag.RemCard(movables[index]);
+                        FrmGame.Instance.AddCard(movables[index]);
+                        Point loc = movables[index].conBeforeDrag.Location;
+                        movables[index].PicBox.Location = new Point(loc.X, loc.Y + (relLocBeforeDrag.Y));
+                        movables[index].PicBox.BringToFront();
+                        index++;
                     }
-
-                    
-
-                    //while (count2 <= movables.Count)
-                    //{
-                    //    conBeforeDrag.RemCard(movables[count2 - 1]);
-                    //    FrmGame.Instance.AddCard(movables[count2 - 1]);
-                    //    Point loc = e.Location;
-                    //    movables[count2 - 1].PicBox.Location = new Point(loc.X, loc.Y + ((movables.Count % count2) * 20));
-                    //    movables[count2 - 1].PicBox.BringToFront();
-                    //    count2++;
-                    //}
-
-
                 }
                 else
                 {
@@ -217,7 +204,7 @@ public class Card
                     {
                         FrmGame.Instance.RemCard(c);
                         conBeforeDrag?.AddCard(c);
-                        c.PicBox.Location = relLocBeforeDrag;
+                        c.PicBox.Location = c.relLocBeforeDrag;
                         c.PicBox.BringToFront();
                     }
                 }
