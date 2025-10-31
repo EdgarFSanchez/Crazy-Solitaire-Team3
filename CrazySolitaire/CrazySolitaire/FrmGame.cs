@@ -31,6 +31,11 @@ namespace CrazySolitaire {
                 [Suit.CLUBS] = panFoundationStack_Clubs,
             };
             Game.Init(panTalon, panTableauStacks, panFoundationStacks);
+
+            ScoreManager.OnScoreChanged += (score) => {
+                lblScore.Text = $"Social Cred: {score}";
+            };
+            ScoreManager.Reset();
         }
 
         private void pbStock_Click(object sender, EventArgs e) {
