@@ -3,19 +3,17 @@ namespace CrazySolitaire
 	public static class ScoreManager
 	{
 		public static int Score { get; private set; } = 0;
+        public static int Multiplier { get; private set; } = 1;
 
-		/// <summary>
-		/// Event that fires whenever the score changes
-		/// The UI can use this event to automatically update the label
-		/// </summary>
-		public static event Action<int> OnScoreChanged;
+        // Event that fires whenever the score changes
+        public static event Action<int> OnScoreChanged;			// Event that fires whenever the score changes
+        public static event Action<int> OnMultiplierChanged;	// Event that fires whenever the multiplier changes
 
-		public static void AddPoints(int points)
+        public static void AddPoints(int points)
 		{
-			Score += points;
-			// Notify listeners that the score has changed
-			OnScoreChanged?.Invoke(Score);
-		}
+			Score += points * Multiplier;
+			OnScoreChanged?.Invoke(Score);						// Notify listeners that the score has changed
+        }
 
 		/// <summary>
 		/// Substracts points from the player's score.
@@ -27,12 +25,20 @@ namespace CrazySolitaire
 			Score -= points;
 			if (Score < 0) Score = 0;
 			OnScoreChanged?.Invoke(Score);
-		}
+        }
 
-		public static void Reset()
+        public static void SetMultiplier(int newMultiplier)
+        {
+            Multiplier = newMultiplier;
+            OnMultiplierChanged?.Invoke(Multiplier);			// Notify listeners that the multiplier has changed
+        }
+
+        public static void Reset()
 		{
 			Score = 0;
+			Multiplier = 1;
 			OnScoreChanged?.Invoke(Score);
-		}
+            OnMultiplierChanged?.Invoke(Multiplier);
+        }
 	}
 }
