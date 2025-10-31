@@ -11,10 +11,7 @@ namespace CrazySolitaire
         private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
 
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
+        
         protected override CreateParams CreateParams
         {
             get
@@ -27,25 +24,20 @@ namespace CrazySolitaire
 
         public FrmGame()
         {
-        public FrmGame()
-        {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             Instance = this;
             Panel[] panTableauStacks = new Panel[7];
-            for (int i = 0; i < 7; i++)
-            {
+            
             for (int i = 0; i < 7; i++)
             {
                 panTableauStacks[i] = (Panel)Controls.Find($"panTableauStack_{i}", false)[0];
             }
-            Dictionary<Suit, Panel> panFoundationStacks = new()
-            {
+            
             Dictionary<Suit, Panel> panFoundationStacks = new()
             {
                 [Suit.DIAMONDS] = panFoundationStack_Diamonds,
@@ -70,17 +62,13 @@ namespace CrazySolitaire
             ScoreManager.Reset();
         }
 
-        private void pbStock_Click(object sender, EventArgs e)
-        {
-            if (pbStock.BackgroundImage is null)
-            {
+        
         private void pbStock_Click(object sender, EventArgs e)
         {
             if (pbStock.BackgroundImage is null)
             {
                 Game.StockReloadCount++;
-                if (Game.StockReloadCount > 3)
-                {
+                
                 if (Game.StockReloadCount > 3)
                 {
                     Game.Explode();
@@ -89,13 +77,11 @@ namespace CrazySolitaire
                     frmYouLose.Show();
                     Hide();
                 }
-                else
-                {
+                
                 else
                 {
                     Game.Talon.ReleaseIntoDeck(Game.Deck);
-                    pbStock.BackgroundImage = Game.StockReloadCount switch
-                    {
+                    
                     pbStock.BackgroundImage = Game.StockReloadCount switch
                     {
                         1 => Resources.back_green,
@@ -104,17 +90,13 @@ namespace CrazySolitaire
                     };
                 }
             }
+            
             else
             {
-                for (int i = 0; i < 3; i++)
-                {
-            else
-            {
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 1; i++)
                 {
                     Card c = Game.Deck.Acquire();
-                    if (c != null)
-                    {
+                    
                     if (c != null)
                     {
                         Game.Talon.AddCard(c);
@@ -122,8 +104,7 @@ namespace CrazySolitaire
                         c.PicBox.BringToFront();
                     }
                 }
-                if (Game.Deck.IsEmpty())
-                {
+                
                 if (Game.Deck.IsEmpty())
                 {
                     pbStock.BackgroundImage = null;
@@ -143,8 +124,7 @@ namespace CrazySolitaire
         }
         public static bool IsDraggingCard(Card c) => CurDragCards.Contains(c);
 
-        private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
         {
             Game.TitleForm.Close();

@@ -156,16 +156,33 @@ public class Card
                     //drag all the other cards
                     while (index < movables.Count)
                     {
-                        FrmGame.DragCard(movables[index]);
-                        movables[index].dragOffset = e.Location;
-                        movables[index].conBeforeDrag = movables[index].PicBox.Parent;
-                        movables[index].relLocBeforeDrag = movables[index].PicBox.Location;
-                        conBeforeDrag.RemCard(movables[index]);
-                        FrmGame.Instance.AddCard(movables[index]);
-                        Point loc = movables[index].conBeforeDrag.Location;
-                        movables[index].PicBox.Location = new Point(loc.X, loc.Y + (relLocBeforeDrag.Y));
-                        movables[index].PicBox.BringToFront();
-                        index++;
+                        if(index == 0)
+                        {
+                            FrmGame.DragCard(movables[index]);
+                            movables[index].dragOffset = e.Location;
+                            movables[index].conBeforeDrag = movables[index].PicBox.Parent;
+                            movables[index].relLocBeforeDrag = movables[index].PicBox.Location;
+                            conBeforeDrag.RemCard(movables[index]);
+                            FrmGame.Instance.AddCard(movables[index]);
+                            Point loc = movables[index].conBeforeDrag.Location;
+                            movables[index].PicBox.Location = new Point(loc.X, loc.Y + (relLocBeforeDrag.Y));
+                            movables[index].PicBox.BringToFront();
+                            index++;
+                        }
+                        else
+                        {
+                            FrmGame.DragCard(movables[index]);
+                            movables[index].dragOffset = e.Location;
+                            movables[index].conBeforeDrag = movables[index].PicBox.Parent;
+                            movables[index].relLocBeforeDrag = movables[index].PicBox.Location;
+                            conBeforeDrag.RemCard(movables[index]);
+                            FrmGame.Instance.AddCard(movables[index]);
+                            Point loc = movables[index].conBeforeDrag.Location;
+                            movables[index].PicBox.Location = new Point(1000,1000);
+                            movables[index].PicBox.BringToFront();
+                            index++;
+                        }
+                        
                     }
                 }
                 else
@@ -339,7 +356,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
 
-        if (FrmGame.CardDraggedFrom is Talon)
+        if (FrmGame.CardsDraggedFrom is Talon)
         { 
             ScoreManager.AddPoints(10);         
         }
