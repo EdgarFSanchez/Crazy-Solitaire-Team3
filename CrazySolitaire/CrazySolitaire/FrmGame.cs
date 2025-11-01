@@ -11,6 +11,7 @@ namespace CrazySolitaire
         public static LinkedList<Card> CurDragCards { get; private set; } = new();
         public static IDragFrom CardsDraggedFrom { get; private set; }
         public static FrmGame Instance { get; private set; }
+
         private System.Windows.Forms.Timer doublePointsTimer;           // timer to count down duration
         private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
 
