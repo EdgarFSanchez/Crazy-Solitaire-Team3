@@ -10,7 +10,7 @@ namespace CrazySolitaire
     {
         public static LinkedList<Card> CurDragCards { get; private set; } = new();
         public static IDragFrom CardsDraggedFrom { get; private set; }
-        public static FrmGame Instance { get; private set; }
+        internal static FrmGame Instance { get;  set; }
 
         private System.Windows.Forms.Timer doublePointsTimer;           // timer to count down duration
         private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
@@ -94,11 +94,20 @@ namespace CrazySolitaire
             SetScoreLabelForBackground("");
             CrazySolitaire.Properties.Settings.Default.SelectedBackgroundId = "";
             CrazySolitaire.Properties.Settings.Default.Save();
+            ScoreManager.Reset(); //may need to move to somewhere else
         }
 
         // lets events (like captcha) temporarily disable hotkeys
         private bool _suppressHotkeys = false;
         public void SetHotkeysSuppressed(bool value) => _suppressHotkeys = value;
+
+        public static void EndOfRound()
+        {
+            FrmEndRound endRound = new();
+            endRound.Show();
+            Instance.Hide();
+
+        }
 
         private void pbStock_Click(object sender, EventArgs e)
         {
@@ -232,6 +241,11 @@ namespace CrazySolitaire
             if (e.KeyCode == Keys.D && !isDoublePointsActive)
             {
                 ActivateDoublePoints();
+            }
+
+            if(e.KeyCode == Keys.E)
+            {
+                EndOfRound();
             }
         }
 
