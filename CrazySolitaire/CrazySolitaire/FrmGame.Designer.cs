@@ -42,6 +42,7 @@
             panTableauStack_5 = new Panel();
             panTableauStack_6 = new Panel();
             lblScore = new Label();
+            Store = new Button();
             ((System.ComponentModel.ISupportInitialize)pbStock).BeginInit();
             SuspendLayout();
             // 
@@ -59,6 +60,7 @@
             // 
             // panTalon
             // 
+            panTalon.BackColor = Color.Transparent;
             panTalon.Location = new Point(160, 27);
             panTalon.Name = "panTalon";
             panTalon.Size = new Size(166, 126);
@@ -67,6 +69,7 @@
             // panFoundationStack_Clubs
             // 
             panFoundationStack_Clubs.AllowDrop = true;
+            panFoundationStack_Clubs.BackColor = Color.Transparent;
             panFoundationStack_Clubs.BackgroundImage = Properties.Resources.FoundationStackBg_Clubs;
             panFoundationStack_Clubs.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Clubs.BorderStyle = BorderStyle.FixedSingle;
@@ -77,6 +80,7 @@
             // 
             // panFoundationStack_Hearts
             // 
+            panFoundationStack_Hearts.BackColor = Color.Transparent;
             panFoundationStack_Hearts.BackgroundImage = Properties.Resources.FoundationStackBg_Hearts;
             panFoundationStack_Hearts.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Hearts.BorderStyle = BorderStyle.FixedSingle;
@@ -87,6 +91,7 @@
             // 
             // panFoundationStack_Spades
             // 
+            panFoundationStack_Spades.BackColor = Color.Transparent;
             panFoundationStack_Spades.BackgroundImage = Properties.Resources.FoundationStackBg_Spades;
             panFoundationStack_Spades.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Spades.BorderStyle = BorderStyle.FixedSingle;
@@ -97,6 +102,7 @@
             // 
             // panFoundationStack_Diamonds
             // 
+            panFoundationStack_Diamonds.BackColor = Color.Transparent;
             panFoundationStack_Diamonds.BackgroundImage = Properties.Resources.FoundationStackBg_Diamonds;
             panFoundationStack_Diamonds.BackgroundImageLayout = ImageLayout.Stretch;
             panFoundationStack_Diamonds.BorderStyle = BorderStyle.FixedSingle;
@@ -108,6 +114,7 @@
             // panTableauStack_0
             // 
             panTableauStack_0.AllowDrop = true;
+            panTableauStack_0.BackColor = Color.Transparent;
             panTableauStack_0.Location = new Point(40, 254);
             panTableauStack_0.Name = "panTableauStack_0";
             panTableauStack_0.Size = new Size(101, 306);
@@ -115,6 +122,7 @@
             // 
             // panTableauStack_1
             // 
+            panTableauStack_1.BackColor = Color.Transparent;
             panTableauStack_1.Location = new Point(169, 254);
             panTableauStack_1.Name = "panTableauStack_1";
             panTableauStack_1.Size = new Size(101, 306);
@@ -122,6 +130,7 @@
             // 
             // panTableauStack_2
             // 
+            panTableauStack_2.BackColor = Color.Transparent;
             panTableauStack_2.Location = new Point(298, 254);
             panTableauStack_2.Name = "panTableauStack_2";
             panTableauStack_2.Size = new Size(101, 306);
@@ -129,6 +138,7 @@
             // 
             // panTableauStack_3
             // 
+            panTableauStack_3.BackColor = Color.Transparent;
             panTableauStack_3.Location = new Point(427, 254);
             panTableauStack_3.Name = "panTableauStack_3";
             panTableauStack_3.Size = new Size(101, 306);
@@ -136,6 +146,7 @@
             // 
             // panTableauStack_4
             // 
+            panTableauStack_4.BackColor = Color.Transparent;
             panTableauStack_4.Location = new Point(556, 254);
             panTableauStack_4.Name = "panTableauStack_4";
             panTableauStack_4.Size = new Size(101, 306);
@@ -143,6 +154,7 @@
             // 
             // panTableauStack_5
             // 
+            panTableauStack_5.BackColor = Color.Transparent;
             panTableauStack_5.Location = new Point(685, 254);
             panTableauStack_5.Name = "panTableauStack_5";
             panTableauStack_5.Size = new Size(101, 306);
@@ -150,6 +162,7 @@
             // 
             // panTableauStack_6
             // 
+            panTableauStack_6.BackColor = Color.Transparent;
             panTableauStack_6.Location = new Point(814, 254);
             panTableauStack_6.Name = "panTableauStack_6";
             panTableauStack_6.Size = new Size(101, 306);
@@ -158,8 +171,9 @@
             // lblScore
             // 
             lblScore.AutoSize = true;
+            lblScore.BackColor = Color.Transparent;
             lblScore.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblScore.ForeColor = Color.White;
+            lblScore.ForeColor = Color.Black;
             lblScore.Location = new Point(40, 188);
             lblScore.Margin = new Padding(2, 0, 2, 0);
             lblScore.Name = "lblScore";
@@ -167,12 +181,28 @@
             lblScore.TabIndex = 6;
             lblScore.Text = " Social Cred:";
             // 
+            // Store
+            // 
+            Store.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            Store.BackColor = Color.Blue;
+            Store.FlatStyle = FlatStyle.Flat;
+            Store.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Store.Location = new Point(839, 191);
+            Store.Name = "Store";
+            Store.Size = new Size(75, 32);
+            Store.TabIndex = 7;
+            Store.Text = "Store";
+            Store.UseVisualStyleBackColor = false;
+            Store.Click += Store_Click;
+            // 
             // FrmGame
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 64, 0);
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(976, 637);
+            Controls.Add(Store);
             Controls.Add(lblScore);
             Controls.Add(panTableauStack_6);
             Controls.Add(panTableauStack_5);
@@ -215,5 +245,6 @@
         private Panel panTableauStack_5;
         private Panel panTableauStack_6;
         private Label lblScore;
+        private Button Store;
     }
 }

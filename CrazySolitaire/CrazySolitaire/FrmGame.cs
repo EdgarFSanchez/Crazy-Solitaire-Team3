@@ -112,6 +112,31 @@ namespace CrazySolitaire
             }
         }
 
+        public void ApplyBackground(Image img, ImageLayout layout = ImageLayout.Stretch)
+        {
+            this.BackgroundImage = img;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
+        }
+
+        private void ApplySavedBackgroundIfAny()
+        {
+            var id = CrazySolitaire.Properties.Settings.Default.SelectedBackgroundId;
+            if (string.IsNullOrEmpty(id)) return;
+
+            switch (id)
+            {
+                case "saul":
+                    ApplyBackground(Properties.Resources.latest1);
+                    break;
+                case "lebron":
+                    ApplyBackground(Properties.Resources.hq720); // use your actual resource key
+                    break;
+            }
+        }
+
+
+
         public static void DragCard(Card c)
         {
             CurDragCards.AddLast(c);
@@ -153,6 +178,13 @@ namespace CrazySolitaire
             if (e.KeyCode == Keys.D && !isDoublePointsActive)
             {
                 ActivateDoublePoints();
+            }
+        }
+
+        private void Store_Click(object sender, EventArgs e) {
+            using (var store = new Form1()) { 
+                store.StartPosition = FormStartPosition.CenterScreen;
+                store.ShowDialog(this);
             }
         }
     }
