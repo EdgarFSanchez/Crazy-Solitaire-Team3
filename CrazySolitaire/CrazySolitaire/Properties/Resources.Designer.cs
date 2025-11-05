@@ -543,6 +543,16 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hq720 {
+            get {
+                object obj = ResourceManager.GetObject("hq720", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap jack_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("jack_of_clubs", resourceCulture);
@@ -623,6 +633,16 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap latest1 {
+            get {
+                object obj = ResourceManager.GetObject("latest1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap queen_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("queen_of_clubs", resourceCulture);
@@ -676,6 +696,16 @@ namespace CrazySolitaire.Properties {
         internal static System.Drawing.Bitmap red_joker {
             get {
                 object obj = ResourceManager.GetObject("red_joker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shopbg {
+            get {
+                object obj = ResourceManager.GetObject("shopbg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

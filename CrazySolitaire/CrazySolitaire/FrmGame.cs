@@ -10,14 +10,12 @@ namespace CrazySolitaire
         private System.Windows.Forms.Timer doublePointsTimer;           // timer to count down duration
         private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
 
-
-        
         protected override CreateParams CreateParams
         {
             get
             {
                 var cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000;    // Turn on WS_EX_COMPOSITED
+                cp.ExStyle |= 0x02000000;
                 return cp;
             }
         }
@@ -27,17 +25,16 @@ namespace CrazySolitaire
             InitializeComponent();
         }
 
-        
         private void Form1_Load(object sender, EventArgs e)
         {
             Instance = this;
+
             Panel[] panTableauStacks = new Panel[7];
-            
             for (int i = 0; i < 7; i++)
             {
                 panTableauStacks[i] = (Panel)Controls.Find($"panTableauStack_{i}", false)[0];
             }
-            
+
             Dictionary<Suit, Panel> panFoundationStacks = new()
             {
                 [Suit.DIAMONDS] = panFoundationStack_Diamonds,
@@ -45,30 +42,40 @@ namespace CrazySolitaire
                 [Suit.HEARTS] = panFoundationStack_Hearts,
                 [Suit.CLUBS] = panFoundationStack_Clubs,
             };
+
             Game.Init(panTalon, panTableauStacks, panFoundationStacks);
 
-            // Setup the Double Points Modifier timer
             doublePointsTimer = new System.Windows.Forms.Timer();
-            doublePointsTimer.Interval = 10000;                         // 10 seconds of double points
+            doublePointsTimer.Interval = 10000;
             doublePointsTimer.Tick += (s, e) =>
             {
-                ScoreManager.SetMultiplier(1);                          // Reset multiplier
+                if (!ScoreManager.PermanentDoubleCredits)
+                {
+                    ScoreManager.SetMultiplier(1);
+                }
+
                 isDoublePointsActive = false;
                 doublePointsTimer.Stop();
-                lblScore.ForeColor = Color.White;                       // reset text color
+
+                SetScoreLabelForBackground(CurrentBackgroundId);
             };
 
             ScoreManager.OnScoreChanged += (score) => { lblScore.Text = $"Social Cred: {score}"; };
+
             ScoreManager.Reset();
+
+            ClearBackgroundToDefaultGreen();
+            SetScoreLabelForBackground("");
+            CrazySolitaire.Properties.Settings.Default.SelectedBackgroundId = "";
+            CrazySolitaire.Properties.Settings.Default.Save();
         }
 
-        
         private void pbStock_Click(object sender, EventArgs e)
         {
             if (pbStock.BackgroundImage is null)
             {
                 Game.StockReloadCount++;
-                
+
                 if (Game.StockReloadCount > 3)
                 {
                     Game.Explode();
@@ -77,11 +84,10 @@ namespace CrazySolitaire
                     frmYouLose.Show();
                     Hide();
                 }
-                
                 else
                 {
                     Game.Talon.ReleaseIntoDeck(Game.Deck);
-                    
+
                     pbStock.BackgroundImage = Game.StockReloadCount switch
                     {
                         1 => Resources.back_green,
@@ -90,13 +96,12 @@ namespace CrazySolitaire
                     };
                 }
             }
-            
             else
             {
                 for (int i = 0; i < 1; i++)
                 {
                     Card c = Game.Deck.Acquire();
-                    
+
                     if (c != null)
                     {
                         Game.Talon.AddCard(c);
@@ -104,12 +109,41 @@ namespace CrazySolitaire
                         c.PicBox.BringToFront();
                     }
                 }
-                
+
                 if (Game.Deck.IsEmpty())
                 {
                     pbStock.BackgroundImage = null;
                 }
             }
+        }
+
+        public void ApplyBackground(Image img, ImageLayout layout = ImageLayout.Stretch)
+        {
+            this.BackgroundImage = img;
+            this.BackgroundImageLayout = layout;
+        }
+
+        public void SetScoreLabelForBackground(string id)
+        {
+            lblScore.ForeColor = (id == "lebron") ? Color.Black : Color.White;
+        }
+
+        public string CurrentBackgroundId { get; private set; } = "";
+
+        public void ApplyBackgroundWithId(Image img, string id, ImageLayout layout = ImageLayout.Stretch)
+        {
+            this.BackgroundImage = img;
+            this.BackgroundImageLayout = layout;
+            CurrentBackgroundId = id;
+            SetScoreLabelForBackground(id);
+        }
+
+        public void ClearBackgroundToDefaultGreen()
+        {
+            this.BackgroundImage = null;
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            CurrentBackgroundId = "";
+            SetScoreLabelForBackground("");
         }
 
         public static void DragCard(Card c)
@@ -124,7 +158,6 @@ namespace CrazySolitaire
         }
         public static bool IsDraggingCard(Card c) => CurDragCards.Contains(c);
 
-        
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
         {
             Game.TitleForm.Close();
@@ -135,7 +168,7 @@ namespace CrazySolitaire
             if (keyData == Keys.D && !isDoublePointsActive)
             {
                 ActivateDoublePoints();
-                return true; // indicate we handled it
+                return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -144,7 +177,7 @@ namespace CrazySolitaire
         {
             isDoublePointsActive = true;
             ScoreManager.SetMultiplier(2);
-            lblScore.ForeColor = Color.Red;                 // visual cue
+            lblScore.ForeColor = Color.Red;
             doublePointsTimer.Start();
         }
 
@@ -153,6 +186,15 @@ namespace CrazySolitaire
             if (e.KeyCode == Keys.D && !isDoublePointsActive)
             {
                 ActivateDoublePoints();
+            }
+        }
+
+        private void Store_Click(object sender, EventArgs e)
+        {
+            using (var store = new Form1())
+            {
+                store.StartPosition = FormStartPosition.CenterScreen;
+                store.ShowDialog(this);
             }
         }
     }
