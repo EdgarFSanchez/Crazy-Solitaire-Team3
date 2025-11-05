@@ -28,61 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
-            lblScore = new TextBox();
             goodmanbtn = new Button();
-            textBox2 = new TextBox();
             lebron = new PictureBox();
             button2 = new Button();
-            textBox3 = new TextBox();
+            button3 = new Button();
+            btnResetBg = new Button();
+            storelbl = new Label();
+            Sclbl = new Label();
+            bglbl = new Label();
+            Modlbl = new Label();
+            label1 = new Label();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lebron).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.FromArgb(0, 64, 0);
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox1.ForeColor = SystemColors.Window;
-            textBox1.Location = new Point(12, 12);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(100, 32);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "Store";
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImage = Properties.Resources.latest1;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Location = new Point(12, 110);
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.Location = new Point(448, 110);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(193, 112);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // lblScore
-            // 
-            lblScore.BackColor = Color.FromArgb(0, 64, 0);
-            lblScore.BorderStyle = BorderStyle.None;
-            lblScore.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblScore.ForeColor = SystemColors.Window;
-            lblScore.Location = new Point(522, 21);
-            lblScore.Name = "lblScore";
-            lblScore.ReadOnly = true;
-            lblScore.Size = new Size(295, 32);
-            lblScore.TabIndex = 3;
-            lblScore.Text = "Social Credit: ";
-            // 
             // goodmanbtn
             // 
             goodmanbtn.BackColor = Color.Gold;
             goodmanbtn.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            goodmanbtn.Location = new Point(67, 228);
+            goodmanbtn.Location = new Point(503, 228);
             goodmanbtn.Name = "goodmanbtn";
             goodmanbtn.Size = new Size(80, 37);
             goodmanbtn.TabIndex = 1;
@@ -90,25 +69,13 @@
             goodmanbtn.UseVisualStyleBackColor = false;
             goodmanbtn.Click += goodmanbtn_Click;
             // 
-            // textBox2
-            // 
-            textBox2.BackColor = Color.FromArgb(0, 64, 0);
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBox2.ForeColor = SystemColors.Window;
-            textBox2.Location = new Point(16, 67);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(189, 32);
-            textBox2.TabIndex = 4;
-            textBox2.Text = "Background";
-            // 
             // lebron
             // 
             lebron.BackColor = Color.Transparent;
             lebron.BackgroundImage = Properties.Resources.hq720;
             lebron.BackgroundImageLayout = ImageLayout.Stretch;
-            lebron.Location = new Point(231, 110);
+            lebron.BorderStyle = BorderStyle.FixedSingle;
+            lebron.Location = new Point(238, 110);
             lebron.Name = "lebron";
             lebron.Size = new Size(193, 112);
             lebron.TabIndex = 5;
@@ -126,44 +93,145 @@
             button2.UseVisualStyleBackColor = false;
             button2.Click += Lebronbtn_Click;
             // 
-            // textBox3
+            // button3
             // 
-            textBox3.Location = new Point(12, 309);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 7;
+            button3.BackColor = Color.Gold;
+            button3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button3.Location = new Point(67, 427);
+            button3.Name = "button3";
+            button3.Size = new Size(80, 37);
+            button3.TabIndex = 10;
+            button3.Text = "BUY";
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
+            // 
+            // btnResetBg
+            // 
+            btnResetBg.BackColor = Color.Gold;
+            btnResetBg.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnResetBg.Location = new Point(67, 228);
+            btnResetBg.Name = "btnResetBg";
+            btnResetBg.Size = new Size(80, 37);
+            btnResetBg.TabIndex = 11;
+            btnResetBg.Text = "Default";
+            btnResetBg.UseVisualStyleBackColor = false;
+            btnResetBg.Click += btnResetBg_Click;
+            // 
+            // storelbl
+            // 
+            storelbl.AutoSize = true;
+            storelbl.BackColor = Color.Transparent;
+            storelbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            storelbl.ForeColor = SystemColors.Control;
+            storelbl.Location = new Point(12, 9);
+            storelbl.Name = "storelbl";
+            storelbl.Size = new Size(73, 32);
+            storelbl.TabIndex = 12;
+            storelbl.Text = "Store";
+            storelbl.Click += storelbl_Click;
+            // 
+            // Sclbl
+            // 
+            Sclbl.AutoSize = true;
+            Sclbl.BackColor = Color.Transparent;
+            Sclbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Sclbl.ForeColor = SystemColors.Control;
+            Sclbl.Location = new Point(593, 9);
+            Sclbl.Name = "Sclbl";
+            Sclbl.Size = new Size(171, 32);
+            Sclbl.TabIndex = 13;
+            Sclbl.Text = "Social Credit: ";
+            Sclbl.Click += Sclbl_Click;
+            // 
+            // bglbl
+            // 
+            bglbl.AutoSize = true;
+            bglbl.BackColor = Color.Transparent;
+            bglbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            bglbl.ForeColor = SystemColors.Control;
+            bglbl.Location = new Point(12, 75);
+            bglbl.Name = "bglbl";
+            bglbl.Size = new Size(163, 32);
+            bglbl.TabIndex = 14;
+            bglbl.Text = "Backgrounds";
+            bglbl.Click += bglbl_Click;
+            // 
+            // Modlbl
+            // 
+            Modlbl.AutoSize = true;
+            Modlbl.BackColor = Color.Transparent;
+            Modlbl.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Modlbl.ForeColor = SystemColors.Control;
+            Modlbl.Location = new Point(25, 302);
+            Modlbl.Name = "Modlbl";
+            Modlbl.Size = new Size(124, 32);
+            Modlbl.TabIndex = 15;
+            Modlbl.Text = "Modifiers";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI Black", 36F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(128, 128, 255);
+            label1.Location = new Point(62, 348);
+            label1.Name = "label1";
+            label1.Size = new Size(85, 65);
+            label1.TabIndex = 16;
+            label1.Text = "2x";
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = Color.FromArgb(0, 64, 0);
+            pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox2.Location = new Point(25, 110);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(193, 112);
+            pictureBox2.TabIndex = 17;
+            pictureBox2.TabStop = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(0, 64, 0);
+            BackgroundImage = Properties.Resources.shopbg;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(976, 637);
-            Controls.Add(textBox3);
+            Controls.Add(pictureBox2);
+            Controls.Add(label1);
+            Controls.Add(Modlbl);
+            Controls.Add(bglbl);
+            Controls.Add(Sclbl);
+            Controls.Add(storelbl);
+            Controls.Add(btnResetBg);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(lebron);
-            Controls.Add(textBox2);
-            Controls.Add(lblScore);
             Controls.Add(pictureBox1);
             Controls.Add(goodmanbtn);
-            Controls.Add(textBox1);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)lebron).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TextBox textBox1;
         private PictureBox pictureBox1;
-        private TextBox lblScore;
         private Button goodmanbtn;
-        private TextBox textBox2;
         private PictureBox lebron;
         private Button button2;
-        private TextBox textBox3;
+        private Button button3;
+        private Button btnResetBg;
+        private Label storelbl;
+        private Label Sclbl;
+        private Label bglbl;
+        private Label Modlbl;
+        private Label label1;
+        private PictureBox pictureBox2;
     }
 }
