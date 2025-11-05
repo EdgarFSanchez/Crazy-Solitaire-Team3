@@ -146,8 +146,6 @@ namespace CrazySolitaire
             SetScoreLabelForBackground("");
         }
 
-
-
         public static void DragCard(Card c)
         {
             CurDragCards.AddLast(c);
