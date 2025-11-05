@@ -101,9 +101,14 @@ namespace CrazySolitaire
         private bool _suppressHotkeys = false;
         public void SetHotkeysSuppressed(bool value) => _suppressHotkeys = value;
 
-        public static void EndOfRound()
+        public static void EndOfRound(Boolean x)
         {
             FrmEndRound endRound = new();
+            if(x)
+            {
+                endRound.txtbxResult.Text = "You win!";
+            }
+            
             endRound.Show();
             Instance.Hide();
 
@@ -245,8 +250,34 @@ namespace CrazySolitaire
 
             if(e.KeyCode == Keys.E)
             {
-                EndOfRound();
+                EndOfRound(true);
             }
+        }
+
+        private void Store_Click(object sender, EventArgs e)
+        {
+            using (var store = new Form1())
+            {
+                store.StartPosition = FormStartPosition.CenterScreen;
+                store.ShowDialog(this);
+            }
+        }
+
+        // minimal surface the events can call into
+        private sealed class GameApi : IGameApi
+        {
+            private readonly FrmGame _form;
+            public GameApi(FrmGame form) { _form = form; }
+
+            public bool IsBusyAnimating => false;
+            public void PausePlayerInput() => _form.Enabled = false;
+            public void ResumePlayerInput() => _form.Enabled = true;
+            public void AddScore(int points) => ScoreManager.AddPoints(points);
+            public void MultiplyScoreFor(TimeSpan duration, double factor) { }
+            public void ShuffleStock() { }
+            public void ShuffleOneTableauColumn() { }
+            public void AutoMoveOneLegalCard() { }
+            public void SetInvertedControls(bool inverted) { }
         }
 
         private void Store_Click(object sender, EventArgs e)

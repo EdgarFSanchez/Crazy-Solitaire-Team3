@@ -15,12 +15,12 @@
         private void InitializeComponent()
         {
             btnNextRound = new Button();
-            Result = new TextBox();
+            txtbxResult = new TextBox();
             SuspendLayout();
             // 
             // btnNextRound
             // 
-            btnNextRound.Location = new Point(608, 552);
+            btnNextRound.Location = new Point(405, 301);
             btnNextRound.Name = "btnNextRound";
             btnNextRound.Size = new Size(119, 34);
             btnNextRound.TabIndex = 0;
@@ -28,23 +28,23 @@
             btnNextRound.UseVisualStyleBackColor = true;
             btnNextRound.Click += btnNextRound_Click;
             // 
-            // Result
+            // txtbxResult
             // 
-            Result.Enabled = false;
-            Result.Location = new Point(627, 388);
-            Result.Name = "Result";
-            Result.RightToLeft = RightToLeft.Yes;
-            Result.Size = new Size(150, 31);
-            Result.TabIndex = 1;
-            Result.Text = "You Lose";
-            Result.TextAlign = HorizontalAlignment.Center;
-            Result.TextChanged += Result_TextChanged;
+            txtbxResult.Enabled = false;
+            txtbxResult.Location = new Point(391, 241);
+            txtbxResult.Name = "txtbxResult";
+            txtbxResult.RightToLeft = RightToLeft.Yes;
+            txtbxResult.Size = new Size(150, 31);
+            txtbxResult.TabIndex = 1;
+            txtbxResult.Text = "You Lose";
+            txtbxResult.TextAlign = HorizontalAlignment.Center;
+            txtbxResult.TextChanged += Result_TextChanged;
             // 
             // FrmEndRound
             // 
             BackColor = Color.FromArgb(64, 0, 64);
-            ClientSize = new Size(1394, 1062);
-            Controls.Add(Result);
+            ClientSize = new Size(976, 637);
+            Controls.Add(txtbxResult);
             Controls.Add(btnNextRound);
             Name = "FrmEndRound";
             StartPosition = FormStartPosition.CenterScreen;
@@ -52,8 +52,8 @@
             PerformLayout();
 
         }
-        private TextBox Result;
-        private Button btnNextRound;
+        public TextBox txtbxResult;
+        public Button btnNextRound;
 
         private void btnNextRound_Click(object sender, EventArgs e)
         {

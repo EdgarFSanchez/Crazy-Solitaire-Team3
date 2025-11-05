@@ -484,6 +484,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
         c.IsIn = null;
+        Game.checkWin();
         //c.Foundation = this;
     }
 
@@ -501,7 +502,6 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
     public void AddCard(Card card)
     {
         Dropped(card);
-        Game.checkWin();
     }
 }
 
@@ -655,7 +655,7 @@ public static class Game
             return;
         }
 
-        FrmGame.EndOfRound();
+        FrmGame.EndOfRound(true);
     }
     public static void Explode()
     {
