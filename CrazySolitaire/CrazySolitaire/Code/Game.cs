@@ -100,17 +100,26 @@ public class Card
     public CardType Type { get; private set; }
     public Suit Suit { get; private set; }
     public bool FaceUp { get; private set; }
+    public bool IsWildCard { get; set; } = false;
     public bool HasScoredInFoundation { get; set; } = false;
     public PictureBox PicBox { get; private set; }
     internal TableauStack IsIn { get; set; }//tableau stack that card is currently in
-   // internal FoundationStack Foundation {  get; set; }//foundation stack that card is currently in
-
+    // internal FoundationStack Foundation {  get; set; }//foundation stack that card is currently in
 
     public Bitmap PicImg
     {
-        get => FaceUp ? Resources.ResourceManager.GetObject($"{Type.ToString().Replace("_", "").ToLower()}_of_{Suit.ToString().ToLower()}") as Bitmap
-                      : Resources.back_green;
-    }
+        get
+        {
+            if (!FaceUp)
+                return Resources.back_green;
+
+            if (IsWildCard)
+                return Resources.wild_card; 
+
+            return Resources.ResourceManager.GetObject($"{Type.ToString().Replace("_", "").ToLower()}_of_{Suit.ToString().ToLower()}") as Bitmap;
+        }
+    } 
+
     private Point dragOffset;
     private Point relLocBeforeDrag;
     private Control conBeforeDrag;
@@ -285,6 +294,11 @@ public class Card
         PicBox.Left = left;
         PicBox.Top = top;
     }
+
+    public void RefreshImage()
+    {
+        PicBox.BackgroundImage = PicImg;
+    }
 }
 
 public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
@@ -335,24 +349,25 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
         }
     }
 
-    public bool CanDrop(Card c)
-    {
-        if (Cards.Count == 0)
-        {
+    public bool CanDrop(Card c) {
+        if (c.IsWildCard) return true;
+
+        if (Cards.Count == 0) {
             return c.Type == CardType.KING;
         }
         else
         {
             Card lastCard = Cards.Last.Value;
+
+            if (lastCard.IsWildCard) return true;                                   // If the top card is a Wild Card - Always allow drop
             bool suitCheck = ((int)lastCard.Suit % 2 != (int)c.Suit % 2);
             bool typeCheck = lastCard.Type == c.Type + 1;
             return (suitCheck && typeCheck);
         }
     }
 
-    public void Dropped(Card c)
-    {
-        AddCard(c);
+    public void Dropped(Card c) {
+        Cards.AddLast(c);
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
 
@@ -451,6 +466,12 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
 
     public bool CanDrop(Card c)
     {
+        if (c.IsWildCard)
+        {
+            Panel.BackColor = Color.Red;
+            return false;
+        }
+
         Card topCard = Cards.Count > 0 ? Cards.Peek() : null;
         bool suitCheck;
         bool typeCheck;
@@ -473,6 +494,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
             Panel.BackColor = Color.Red;
         }
         return suitCheck && typeCheck;
+        
     }
 
     public void Dropped(Card c)
@@ -480,6 +502,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
         Cards.Push(c);
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
+
         ScoreManager.AddPoints(20);
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
@@ -514,6 +537,8 @@ public static class Game
     public static TableauStack[] TableauStacks;
     public static Talon Talon { get; set; }
     public static int StockReloadCount { get; set; }
+    public static Card WildCard = null;
+
 
     static Game()
     {
@@ -523,6 +548,7 @@ public static class Game
     public static void Init(Panel panTalon, Panel[] panTableauStacks, Dictionary<Suit, Panel> panFoundationStacks)
     {
         Deck = new();
+        WildCard = null;
 
         // create talon
         Talon = new(panTalon);
@@ -720,5 +746,29 @@ public static class Game
         };
         tmr.Start();
     }
+
+    public static void SpawnWildCard()
+    {
+        // only one at a time
+        if (WildCard != null)
+            return;
+
+        // Create a new card (the type/suit don't really matter visually)
+        Card wild = new Card(CardType.ACE, Suit.SPADES)
+        {
+            IsWildCard = true
+        };
+        wild.RefreshImage();
+
+        Talon.AddCard(wild); // ensures proper parent and drag registration
+
+        wild.PicBox.BringToFront();
+
+        // Store a reference
+        WildCard = wild;
+
+        MessageBox.Show("Wild Card spawned! Drag it to any tableau stack.", "Crazy Solitaire");
+    }
+
 }
 
