@@ -232,6 +232,11 @@ namespace CrazySolitaire
             {
                 ActivateDoublePoints();
             }
+
+            if (e.KeyCode == Keys.W)
+            {
+                Game.SpawnWildCard();
+            }
         }
 
         private void Store_Click(object sender, EventArgs e)
