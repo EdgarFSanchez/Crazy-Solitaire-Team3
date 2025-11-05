@@ -219,7 +219,7 @@ namespace CrazySolitaire
         }
 
         /// <summary>
-        /// Already equipped state (disable and silver)
+        /// Already equipped state (disable)
         /// </summary>
         /// <param name="b"></param>
         private void SetEquipped(Button b)
