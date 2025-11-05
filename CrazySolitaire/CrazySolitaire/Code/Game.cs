@@ -397,7 +397,7 @@ public class Talon : IFindMoveableCards, IDragFrom
 
     public void ReleaseIntoDeck(Deck deck)
     {
-        foreach (var card in Cards)
+        foreach (var card in Cards.Reverse())
         {
             deck.Release(card);
             Panel.RemCard(card);
