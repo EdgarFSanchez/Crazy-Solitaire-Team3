@@ -10,7 +10,8 @@ namespace CrazySolitaire
     {
         public static LinkedList<Card> CurDragCards { get; private set; } = new();
         public static IDragFrom CardsDraggedFrom { get; private set; }
-        public static FrmGame Instance { get; private set; }
+        internal static FrmGame Instance { get; set; }
+
         private System.Windows.Forms.Timer doublePointsTimer;           // timer to count down duration
         private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
 
@@ -93,11 +94,25 @@ namespace CrazySolitaire
             SetScoreLabelForBackground("");
             CrazySolitaire.Properties.Settings.Default.SelectedBackgroundId = "";
             CrazySolitaire.Properties.Settings.Default.Save();
+            ScoreManager.Reset(); //may need to move to somewhere else
         }
 
         // lets events (like captcha) temporarily disable hotkeys
         private bool _suppressHotkeys = false;
         public void SetHotkeysSuppressed(bool value) => _suppressHotkeys = value;
+
+        public static void EndOfRound(Boolean x)
+        {
+            FrmEndRound endRound = new();
+            if (x)
+            {
+                endRound.txtbxResult.Text = "You win!";
+            }
+
+            endRound.Show();
+            Instance.Hide();
+
+        }
 
         private void pbStock_Click(object sender, EventArgs e)
         {
@@ -135,7 +150,7 @@ namespace CrazySolitaire
                 for (int i = 0; i < 1; i++)
                 {
                     Card c = Game.Deck.Acquire();
-                    
+
                     if (c != null)
                     {
                         Game.Talon.AddCard(c);
@@ -163,7 +178,7 @@ namespace CrazySolitaire
         {
             lblScore.ForeColor = (id == "lebron") ? Color.Black : Color.White;
         }
-        
+
 
         public void ApplyBackgroundWithId(Image img, string id, ImageLayout layout = ImageLayout.Stretch)
         {
@@ -231,6 +246,11 @@ namespace CrazySolitaire
             if (e.KeyCode == Keys.D && !isDoublePointsActive)
             {
                 ActivateDoublePoints();
+            }
+
+            if (e.KeyCode == Keys.E)
+            {
+                EndOfRound(true);
             }
         }
 

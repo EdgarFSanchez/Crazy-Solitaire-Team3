@@ -117,7 +117,7 @@
             panTableauStack_0.BackColor = Color.Transparent;
             panTableauStack_0.Location = new Point(40, 254);
             panTableauStack_0.Name = "panTableauStack_0";
-            panTableauStack_0.Size = new Size(101, 306);
+            panTableauStack_0.Size = new Size(101, 366);
             panTableauStack_0.TabIndex = 4;
             // 
             // panTableauStack_1
@@ -125,7 +125,7 @@
             panTableauStack_1.BackColor = Color.Transparent;
             panTableauStack_1.Location = new Point(169, 254);
             panTableauStack_1.Name = "panTableauStack_1";
-            panTableauStack_1.Size = new Size(101, 306);
+            panTableauStack_1.Size = new Size(101, 366);
             panTableauStack_1.TabIndex = 5;
             // 
             // panTableauStack_2
@@ -133,7 +133,7 @@
             panTableauStack_2.BackColor = Color.Transparent;
             panTableauStack_2.Location = new Point(298, 254);
             panTableauStack_2.Name = "panTableauStack_2";
-            panTableauStack_2.Size = new Size(101, 306);
+            panTableauStack_2.Size = new Size(101, 366);
             panTableauStack_2.TabIndex = 5;
             // 
             // panTableauStack_3
@@ -141,7 +141,7 @@
             panTableauStack_3.BackColor = Color.Transparent;
             panTableauStack_3.Location = new Point(427, 254);
             panTableauStack_3.Name = "panTableauStack_3";
-            panTableauStack_3.Size = new Size(101, 306);
+            panTableauStack_3.Size = new Size(101, 366);
             panTableauStack_3.TabIndex = 5;
             // 
             // panTableauStack_4
@@ -149,7 +149,7 @@
             panTableauStack_4.BackColor = Color.Transparent;
             panTableauStack_4.Location = new Point(556, 254);
             panTableauStack_4.Name = "panTableauStack_4";
-            panTableauStack_4.Size = new Size(101, 306);
+            panTableauStack_4.Size = new Size(101, 366);
             panTableauStack_4.TabIndex = 5;
             // 
             // panTableauStack_5
@@ -157,7 +157,7 @@
             panTableauStack_5.BackColor = Color.Transparent;
             panTableauStack_5.Location = new Point(685, 254);
             panTableauStack_5.Name = "panTableauStack_5";
-            panTableauStack_5.Size = new Size(101, 306);
+            panTableauStack_5.Size = new Size(101, 366);
             panTableauStack_5.TabIndex = 5;
             // 
             // panTableauStack_6
@@ -165,7 +165,7 @@
             panTableauStack_6.BackColor = Color.Transparent;
             panTableauStack_6.Location = new Point(814, 254);
             panTableauStack_6.Name = "panTableauStack_6";
-            panTableauStack_6.Size = new Size(101, 306);
+            panTableauStack_6.Size = new Size(101, 366);
             panTableauStack_6.TabIndex = 5;
             // 
             // lblScore

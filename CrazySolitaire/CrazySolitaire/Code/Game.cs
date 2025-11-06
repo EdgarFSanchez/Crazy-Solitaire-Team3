@@ -68,7 +68,7 @@ public static class MyExtensions
 
 public class Deck
 {
-    private Queue<Card> cards;
+    internal Queue<Card> cards;
 
     public Deck()
     {
@@ -397,7 +397,7 @@ public class Talon : IFindMoveableCards, IDragFrom
 
     public void ReleaseIntoDeck(Deck deck)
     {
-        foreach (var card in Cards)
+        foreach (var card in Cards.Reverse())
         {
             deck.Release(card);
             Panel.RemCard(card);
@@ -484,6 +484,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
         c.IsIn = null;
+        Game.checkWin();
         //c.Foundation = this;
     }
 
@@ -507,6 +508,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
 public static class Game
 {
     public static Form TitleForm { get; set; }
+    public static Form RoundForm { get; set; }
     public static Deck Deck { get; private set; }
     public static Dictionary<Suit, FoundationStack> FoundationStacks { get; set; }
     public static TableauStack[] TableauStacks;
@@ -638,6 +640,23 @@ public static class Game
         return false;
     }
 
+    public static void checkWin()
+    {
+        foreach (TableauStack t in TableauStacks)
+        {
+            if (t.Cards.Count != 0)
+            {
+                return;
+            }
+        }
+
+        if (Deck.cards.Count != 0 || Talon.Cards.Count != 0)
+        {
+            return;
+        }
+
+        FrmGame.EndOfRound(true);
+    }
     public static void Explode()
     {
         List<Card> allCardsInPlay = new();
