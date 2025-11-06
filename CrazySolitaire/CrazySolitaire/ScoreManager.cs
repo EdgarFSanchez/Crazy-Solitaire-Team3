@@ -1,15 +1,32 @@
 namespace CrazySolitaire
 {
+    /// <summary>
+    /// Manages al scoring logic for the Crazy Solitare Game
+    /// Handles adding, subtracting, and multiplying points
+    /// </summary>
     public static class ScoreManager
     {
+
+        /// <summary>
+        /// Current total score for the player
+        /// </summary>
         public static int Score { get; private set; } = 0;
+
+        /// <summary>
+        /// Current score multiplier, by default it's 1
+        /// </summary>
         public static int Multiplier { get; private set; } = 1;
 
-        // NEW: tracks if 2x was bought (session-wide)
+        /// <summary>
+        /// Checks to see if player has purchased a double-points modifier.
+        /// Persists for the entire round
+        /// </summary>
         public static bool PermanentDoubleCredits { get; private set; } = false;
 
+        // Events notifying the UI and other systems when values change
         public static event Action<int> OnScoreChanged;
         public static event Action<int> OnMultiplierChanged;
+
 
         public static void AddPoints(int points)
         {
@@ -30,25 +47,35 @@ namespace CrazySolitaire
             OnMultiplierChanged?.Invoke(Multiplier);
         }
 
-        // NEW: buy-and-keep 2x for the whole session
+         /// <summary>
+         /// Enables permanent 2x points for the round
+         /// </summary>
         public static void PurchaseDoubleCredits()
         {
-            PermanentDoubleCredits = true;
+            PermanentDoubleCredits = true;                      // Mark upgrade as purchased    
+
+            // Ensure active multiplier is at least 2x
             if (Multiplier < 2) SetMultiplier(2);
         }
 
-        // NEW: reset only the score (keep multiplier as-is)
+        /// <summary>
+        /// Resets only the player's score to 0
+        /// Multiplier remains unchanged
+        /// </summary>
         public static void ResetScoreOnly()
         {
             Score = 0;
             OnScoreChanged?.Invoke(Score);
         }
 
-        // Keep this if other places rely on Reset(); respect permanent 2x.
+        /// <summary>
+        /// Fully resets score and multiplier. 
+        /// Keeps the permanent 2x multiplier active if purchased.
+        /// </summary>
         public static void Reset()
         {
             Score = 0;
-            Multiplier = PermanentDoubleCredits ? 2 : 1;
+            Multiplier = PermanentDoubleCredits ? 2 : 1;        // Keep multiplier if the player bought it
             OnScoreChanged?.Invoke(Score);
             OnMultiplierChanged?.Invoke(Multiplier);
         }
