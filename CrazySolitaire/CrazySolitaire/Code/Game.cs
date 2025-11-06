@@ -327,6 +327,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
             {
                 c.Suit = Suit.HEARTS;
             }
+
         }
         Cards.AddLast(c);
         Panel.AddCard(c);
