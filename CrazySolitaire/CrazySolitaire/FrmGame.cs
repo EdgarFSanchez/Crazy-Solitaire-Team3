@@ -10,7 +10,7 @@ namespace CrazySolitaire
     {
         public static LinkedList<Card> CurDragCards { get; private set; } = new();
         public static IDragFrom CardsDraggedFrom { get; private set; }
-        internal static FrmGame Instance { get;  set; }
+        internal static FrmGame Instance { get; set; }
 
         private System.Windows.Forms.Timer doublePointsTimer;           // timer to count down duration
         private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
@@ -104,11 +104,11 @@ namespace CrazySolitaire
         public static void EndOfRound(Boolean x)
         {
             FrmEndRound endRound = new();
-            if(x)
+            if (x)
             {
                 endRound.txtbxResult.Text = "You win!";
             }
-            
+
             endRound.Show();
             Instance.Hide();
 
@@ -150,7 +150,7 @@ namespace CrazySolitaire
                 for (int i = 0; i < 1; i++)
                 {
                     Card c = Game.Deck.Acquire();
-                    
+
                     if (c != null)
                     {
                         Game.Talon.AddCard(c);
@@ -178,7 +178,7 @@ namespace CrazySolitaire
         {
             lblScore.ForeColor = (id == "lebron") ? Color.Black : Color.White;
         }
-        
+
 
         public void ApplyBackgroundWithId(Image img, string id, ImageLayout layout = ImageLayout.Stretch)
         {
@@ -248,36 +248,10 @@ namespace CrazySolitaire
                 ActivateDoublePoints();
             }
 
-            if(e.KeyCode == Keys.E)
+            if (e.KeyCode == Keys.E)
             {
                 EndOfRound(true);
             }
-        }
-
-        private void Store_Click(object sender, EventArgs e)
-        {
-            using (var store = new Form1())
-            {
-                store.StartPosition = FormStartPosition.CenterScreen;
-                store.ShowDialog(this);
-            }
-        }
-
-        // minimal surface the events can call into
-        private sealed class GameApi : IGameApi
-        {
-            private readonly FrmGame _form;
-            public GameApi(FrmGame form) { _form = form; }
-
-            public bool IsBusyAnimating => false;
-            public void PausePlayerInput() => _form.Enabled = false;
-            public void ResumePlayerInput() => _form.Enabled = true;
-            public void AddScore(int points) => ScoreManager.AddPoints(points);
-            public void MultiplyScoreFor(TimeSpan duration, double factor) { }
-            public void ShuffleStock() { }
-            public void ShuffleOneTableauColumn() { }
-            public void AutoMoveOneLegalCard() { }
-            public void SetInvertedControls(bool inverted) { }
         }
 
         private void Store_Click(object sender, EventArgs e)
