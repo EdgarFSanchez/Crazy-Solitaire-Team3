@@ -100,22 +100,30 @@ public class Card
     public CardType Type { get; set; }
     public Suit Suit { get; set; }
     public bool FaceUp { get; private set; }
-    public bool IsWildCard { get; set; } = false;
+    public bool IsWildCard { get; set; } = false;       // 
     public bool HasScoredInFoundation { get; set; } = false;
     public PictureBox PicBox { get; private set; }
     internal TableauStack IsIn { get; set; }//tableau stack that card is currently in
     // internal FoundationStack Foundation {  get; set; }//foundation stack that card is currently in
 
+    /// <summary>
+    /// Gets the appropriate image for the card based on its current state
+    /// Returns the card back image if the card is face down, a special image if it's a wild card,
+    /// or the standard card face image corresponding to its type and suit when face up.
+    /// </summary>
     public Bitmap PicImg
     {
         get
         {
+            // Show the card back when it's face down
             if (!FaceUp)
                 return Resources.back_green;
 
+            // Show the special wild card image when applicable
             if (IsWildCard)
                 return Resources.wild_card; 
 
+            // Retrieve the appropriate face image from resources
             return Resources.ResourceManager.GetObject($"{Type.ToString().Replace("_", "").ToLower()}_of_{Suit.ToString().ToLower()}") as Bitmap;
         }
     } 
@@ -147,7 +155,7 @@ public class Card
             if (!FaceUp && Game.CanFlipOver(this))
             {
                 FlipOver();
-                ScoreManager.AddPoints(5);
+                ScoreManager.AddPoints(5);      // Reward player 5 points when the flip over a card
             }
         };
 
@@ -295,9 +303,12 @@ public class Card
         PicBox.Top = top;
     }
 
+    /// <summary>
+    /// Updates the card's displayed image to match its current state
+    /// </summary>
     public void RefreshImage()
     {
-        PicBox.BackgroundImage = PicImg;
+        PicBox.BackgroundImage = PicImg;        // Update the PictureBox to show the current card image
     }
 }
 
@@ -418,6 +429,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
 
+        // If C is coming from Talon stack, reward player 10 points
         if (FrmGame.CardsDraggedFrom is Talon)
         { 
             ScoreManager.AddPoints(10);         
@@ -513,6 +525,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
 
     public bool CanDrop(Card c)
     {
+        // if card is a Wild Card, it can't drop into foundation stack
         if (c.IsWildCard)
         {
             Panel.BackColor = Color.Red;
@@ -550,7 +563,7 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
 
-        ScoreManager.AddPoints(20);
+        ScoreManager.AddPoints(20);             // Player earns 20 points for dropping cards into foundation stacks
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
         c.IsIn = null;
@@ -794,27 +807,31 @@ public static class Game
         tmr.Start();
     }
 
+    /// <summary>
+    /// Spawns a single Wild Card into the game if one doesn't already exist.
+    /// The Wild Card is a special card that can be dragged to any tableau stack. 
+    /// </summary>
     public static void SpawnWildCard()
     {
-        // only one at a time
+        // Prevent multiple wild cards
         if (WildCard != null)
             return;
 
-        // Create a new card (the type/suit don't really matter visually)
+        // Create a new card - type/suit doesn't matter
         Card wild = new Card(CardType.ACE, Suit.SPADES)
         {
             IsWildCard = true
         };
-        wild.RefreshImage();
 
-        Talon.AddCard(wild); // ensures proper parent and drag registration
+        wild.RefreshImage();        // Update the card's image 
+
+        Talon.AddCard(wild);        // Add the card to the Talon to ensure it's properly parented and draggable
 
         wild.PicBox.BringToFront();
 
-        // Store a reference
         WildCard = wild;
 
-        MessageBox.Show("Wild Card spawned! Drag it to any tableau stack.", "Crazy Solitaire");
+        MessageBox.Show("Wild Card spawned! Drag it to any tableau stack.", "Crazy Solitaire");     // Notify the player that the Wild Card has been spawned
     }
 
 }
