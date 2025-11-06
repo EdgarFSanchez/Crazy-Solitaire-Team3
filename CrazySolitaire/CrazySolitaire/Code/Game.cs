@@ -97,8 +97,8 @@ public class Deck
 
 public class Card
 {
-    public CardType Type { get; private set; }
-    public Suit Suit { get; private set; }
+    public CardType Type { get; set; }
+    public Suit Suit { get; set; }
     public bool FaceUp { get; private set; }
     public bool IsWildCard { get; set; } = false;
     public bool HasScoredInFoundation { get; set; } = false;
@@ -314,10 +314,25 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
 
     public void AddCard(Card c)
     {
-        Cards.AddLast(c);
         c.IsIn = this;
+
+        if (c.IsWildCard)
+        {
+            c.Type = c.IsIn.Cards.Last.Value.Type - 1;
+            if ((int)c.IsIn.Cards.Last.Value.Suit % 2 == 0)
+            {
+                c.Suit = Suit.SPADES;
+            }
+            else 
+            {
+                c.Suit = Suit.HEARTS;
+            }
+
+        }
+        Cards.AddLast(c);
         Panel.AddCard(c);
         c.PicBox.BringToFront();
+
     }
 
     public List<Card> FindMoveableCards()
@@ -350,7 +365,10 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
     }
 
     public bool CanDrop(Card c) {
-        if (c.IsWildCard) return true;
+        if (c.IsWildCard)
+        {
+            return true;
+        }
 
         if (Cards.Count == 0) {
             return c.Type == CardType.KING;
@@ -358,8 +376,6 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
         else
         {
             Card lastCard = Cards.Last.Value;
-
-            if (lastCard.IsWildCard) return true;                                   // If the top card is a Wild Card - Always allow drop
             bool suitCheck = ((int)lastCard.Suit % 2 != (int)c.Suit % 2);
             bool typeCheck = lastCard.Type == c.Type + 1;
             return (suitCheck && typeCheck);
@@ -367,7 +383,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
     }
 
     public void Dropped(Card c) {
-        Cards.AddLast(c);
+        AddCard(c);
         FrmGame.Instance.RemCard(c);
         Panel.AddCard(c);
 
