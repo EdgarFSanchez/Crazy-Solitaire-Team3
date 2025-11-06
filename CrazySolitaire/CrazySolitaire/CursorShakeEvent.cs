@@ -47,9 +47,9 @@ namespace CrazySolitaire
         /// <summary>
         /// Starts shaking and shows a countdown toast.
         /// </summary>
-        /// <param name="mainForm"></param>
-        /// <param name="game"></param>
-        /// <param name="onCompleted"></param>
+        /// <param name="mainForm">Form: host form used to place/remove the toast.</param>
+        /// <param name="game">IGameApi: game API instance (not used).</param>
+        /// <param name="onCompleted">Action: callback invoked when the shake ends</param>
         public override void Start(System.Windows.Forms.Form mainForm, IGameApi game, System.Action onCompleted)
         {
             _elapsedMs = 0;

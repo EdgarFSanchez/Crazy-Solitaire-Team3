@@ -4,10 +4,10 @@ using System.Windows.Forms;
 
 namespace CrazySolitaire
 {
-/// <summary>
-/// In game Store form: lets players buy and equip backgrounds along with purchasing modifiers
-/// Keeps button labels in sync (Buy/equip/equipped) and shows live social credit.
-/// </summary>
+    /// <summary>
+    /// In game Store form: lets players buy and equip backgrounds along with purchasing modifiers
+    /// Keeps button labels in sync (Buy/equip/equipped) and shows live social credit.
+    /// </summary>
     public partial class Form1 : Form
     {
         public Form1()
@@ -18,7 +18,7 @@ namespace CrazySolitaire
         /// <summary>
         /// Style buttons, sync the initial UI state, and hook score events.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">EventArgs: load event data.</param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -42,7 +42,7 @@ namespace CrazySolitaire
         /// <summary>
         /// Unsubscribe from events when closing to avoid dangling handlers.
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="e">FormClosedEventArgs: close event data.</param>
         protected override void OnFormClosed(FormClosedEventArgs e)
         {
             ScoreManager.OnScoreChanged -= HandleScoreChanged;
@@ -66,8 +66,8 @@ namespace CrazySolitaire
         /// <summary>
         /// Buy or equip Saul Goodman background.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">object: event source.</param>
+        /// <param name="e">EventArgs: click event data.</param>
         private void goodmanbtn_Click(object sender, EventArgs e)
         {
             HandleBackgroundAction("saul", Properties.Resources.latest1, price: 500);
@@ -76,20 +76,20 @@ namespace CrazySolitaire
         /// <summary>
         /// Buy or equip Lebron James background
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">object: event source.</param>
+        /// <param name="e">EventArgs: click event data.</param>
         private void Lebronbtn_Click(object sender, EventArgs e)
         {
             HandleBackgroundAction("lebron", Properties.Resources.hq720, price: 500);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e){}
+        private void pictureBox1_Click(object sender, EventArgs e) { }
 
         /// <summary>
         /// Reset background to default green
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">object: event source.</param>
+        /// <param name="e">EventArgs: click event data.</param>
         private void btnResetBg_Click(object sender, EventArgs e)
         {
             FrmGame.Instance?.ClearBackgroundToDefaultGreen();
@@ -102,9 +102,9 @@ namespace CrazySolitaire
         /// -> If not owned, try to purchase (validates balance and no double charging this session)
         /// -> Equip immediately and refresh labels and buttons.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="img"></param>
-        /// <param name="price"></param>
+        /// <param name="id">string: background ID.</param>
+        /// <param name="img">Image: background image to apply.</param>
+        /// <param name="price">int: cost in credits.</param>
         private void HandleBackgroundAction(string id, Image img, int price)
         {
             // Purchase once per game if not owned.
@@ -127,8 +127,8 @@ namespace CrazySolitaire
         /// <summary>
         /// Purchase the 2x credits modifier for this session.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">object: event source.</param>
+        /// <param name="e">EventArgs: click event data.</param>
         private void button3_Click(object sender, EventArgs e)
         {
             // 1500 is roughly how much you get for completeling a full game
@@ -157,9 +157,9 @@ namespace CrazySolitaire
         /// Hovering gives an effect.
         /// Strong border/brightness so its visible when hovering.
         /// </summary>
-        /// <param name="b"></param>
-        /// <param name="baseColor"></param>
-        /// <param name="textColor"></param>
+        /// <param name="b">Button: target button.</param>
+        /// <param name="baseColor">Color: base fill color.</param>
+        /// <param name="textColor">Color?: optional text color.</param>
         private void StyleGameButton(Button b, Color baseColor, Color? textColor = null)
         {
             // Layout
@@ -175,9 +175,9 @@ namespace CrazySolitaire
 
             // Visual for states
             var baseCol = baseColor;
-            var hoverCol = Adjust(baseCol, +0.25);  
-            var downCol = Adjust(baseCol, -0.22);  
-            var border = Adjust(baseCol, -0.50);  
+            var hoverCol = Adjust(baseCol, +0.25);
+            var downCol = Adjust(baseCol, -0.22);
+            var border = Adjust(baseCol, -0.50);
             var borderHov = Adjust(baseCol, -0.65);
             var borderDn = Adjust(baseCol, -0.78);
 
@@ -221,7 +221,7 @@ namespace CrazySolitaire
         /// <summary>
         /// Already equipped state (disable)
         /// </summary>
-        /// <param name="b"></param>
+        /// <param name="b">Button: target button.</param>
         private void SetEquipped(Button b)
         {
             b.Enabled = false;
@@ -233,7 +233,7 @@ namespace CrazySolitaire
         /// <summary>
         /// Owned but not active
         /// </summary>
-        /// <param name="b"></param>
+        /// <param name="b">Button: target button.</param>
         private void SetEquip(Button b)
         {
             b.Enabled = true;
@@ -244,7 +244,7 @@ namespace CrazySolitaire
         /// <summary>
         /// Not owned yet
         /// </summary>
-        /// <param name="b"></param>
+        /// <param name="b">Button: target button.</param>
         private void SetBuy(Button b)
         {
             b.Enabled = true;
@@ -256,9 +256,9 @@ namespace CrazySolitaire
         /// Decide which state the background of the button should show.
         /// Can be buy, equip, or equipped
         /// </summary>
-        /// <param name="btn"></param>
-        /// <param name="id"></param>
-        /// <param name="equippedId"></param>
+        /// <param name="btn">Button: target button.</param>
+        /// <param name="id">string: background ID for this button.</param>
+        /// <param name="equippedId">string: currently equipped background ID.</param>
         private void UpdateSingleBgButton(Button btn, string id, string equippedId)
         {
             if (equippedId == id)
@@ -281,10 +281,10 @@ namespace CrazySolitaire
         /// <summary>
         /// Blend between two colors
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <param name="t"></param>
-        /// <returns></returns>
+        /// <param name="a">Color: start color.</param>
+        /// <param name="b">Color: end color.</param>
+        /// <param name="t">double: blend factor 0..1.</param>
+        /// <returns>Color: blended color.</returns>
         private static Color Blend(Color a, Color b, double t)
         {
             int r = (int)Math.Round(a.R + (b.R - a.R) * t);
@@ -296,9 +296,9 @@ namespace CrazySolitaire
         /// <summary>
         /// Lighten or darken a color by blending towards white or black
         /// </summary>
-        /// <param name="c"></param>
-        /// <param name="amount"></param>
-        /// <returns></returns>
+        /// <param name="c">Color: base color.</param>
+        /// <param name="amount">double: positive to lighten, negative to darken.</param>
+        /// <returns>Color: adjusted color.</returns>
         private static Color Adjust(Color c, double amount)
         {
             return amount >= 0 ? Blend(c, Color.White, amount) : Blend(c, Color.Black, -amount);

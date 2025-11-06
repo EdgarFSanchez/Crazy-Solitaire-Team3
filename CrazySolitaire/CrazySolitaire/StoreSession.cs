@@ -18,8 +18,8 @@ namespace CrazySolitaire
         /// <summary>
         /// Returns true if the player already owns this background
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">string: background ID.</param>
+        /// <returns>bool: true if owned; otherwise false.</returns>
         public static bool IsBackgroundOwned(string id) => _ownedBackgroundIds.Contains(id);
 
         /// <summary>
@@ -28,10 +28,10 @@ namespace CrazySolitaire
         /// -> if not enough credits, then fail with an error message.
         /// -> otherwise, deduct and mark as owned.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="price"></param>
-        /// <param name="error"></param>
-        /// <returns></returns>
+        /// <param name="id">string: background ID.</param>
+        /// <param name="price">int: cost in credits.</param>
+        /// <param name="error">out string: error message if the purchase fails; empty on success.</param>
+        /// <returns>bool: true if purchased or already owned; false if not enough credits.</returns>
         public static bool TryPurchaseBackground(string id, int price, out string error)
         {
             error = "";

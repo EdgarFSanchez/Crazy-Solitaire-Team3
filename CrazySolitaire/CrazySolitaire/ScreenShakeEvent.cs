@@ -21,6 +21,12 @@ namespace CrazySolitaire
         private int _ticks;      // number of timer ticks since start
         private readonly Random _rng = new();
 
+        /// <summary>
+        /// Shakes the window for 900 ms, restores its position, then calls the callback.
+        /// </summary>
+        /// <param name="mainForm">Form: the window to shake.</param>
+        /// <param name="game">IGameApi: game context.</param>
+        /// <param name="onCompleted">Action: invoked once when finished.</param>
         public override void Start(System.Windows.Forms.Form mainForm, IGameApi game, System.Action onCompleted)
         {
             _origin = mainForm.Location;

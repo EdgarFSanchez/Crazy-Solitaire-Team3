@@ -47,9 +47,9 @@ namespace CrazySolitaire
         /// <summary>
         /// Displays the overlay, focuses the input box, and starts the countdown
         /// </summary>
-        /// <param name="mainForm"></param>
-        /// <param name="game"></param>
-        /// <param name="onCompleted"></param>
+        /// <param name="mainForm"> Form: the host WinForms Form.</param>
+        /// <param name="game">IGameApi: the game API instance.</param>
+        /// <param name="onCompleted">Action: callback to run when finished.</param>
         public override void Start(System.Windows.Forms.Form mainForm, IGameApi game, System.Action onCompleted)
         {
             _overlay = new Panel { Dock = DockStyle.Fill, BackColor = Color.FromArgb(140, 0, 0, 0) };
