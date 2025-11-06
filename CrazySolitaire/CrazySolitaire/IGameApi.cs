@@ -27,7 +27,7 @@ namespace CrazySolitaire
         /// Adjust the player's score by a delta (positive or negative).
         /// Used by capcha for the reward/penalty.
         /// </summary>
-        /// <param name="points"></param>
+        /// <param name="points">int: amount to add (use negative to subtract)</param>
         void AddScore(int points);
     }
 }

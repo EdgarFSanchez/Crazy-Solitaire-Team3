@@ -44,9 +44,9 @@ namespace CrazySolitaire
         /// Starts the event. Implementations should perform their effects and invoke
         /// paramref name="onCompleted" exactly once when finished.
         /// </summary>
-        /// <param name="mainForm"></param>
-        /// <param name="game"></param>
-        /// <param name="onCompleted"></param>
+        /// <param name="mainForm">Form: host form for any UI.</param>
+        /// <param name="game">IGame: game API instance</param>
+        /// <param name="onCompleted">Action: callback to run when done.</param>
         void Start(System.Windows.Forms.Form mainForm, IGameApi game, System.Action onCompleted);
 
         // Emergency cleanup hook. Should stop timers and remove transient UI if active.
