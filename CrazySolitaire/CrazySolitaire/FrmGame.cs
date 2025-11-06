@@ -1,8 +1,9 @@
+using CrazySolitaire.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using CrazySolitaire.Properties;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace CrazySolitaire
 {
@@ -86,15 +87,14 @@ namespace CrazySolitaire
                 SetScoreLabelForBackground(CurrentBackgroundId);
             };
 
+            // Only reset multiplier, not score, when starting a new round
             ScoreManager.OnScoreChanged += (score) => { lblScore.Text = $"Social Cred: {score}"; };
-
-            ScoreManager.Reset();
+            lblScore.Text = $"Social Cred: {ScoreManager.Score}"; // set initial label
 
             ClearBackgroundToDefaultGreen();
             SetScoreLabelForBackground("");
             CrazySolitaire.Properties.Settings.Default.SelectedBackgroundId = "";
             CrazySolitaire.Properties.Settings.Default.Save();
-            ScoreManager.Reset(); //may need to move to somewhere else
         }
 
         // lets events (like captcha) temporarily disable hotkeys
@@ -109,6 +109,11 @@ namespace CrazySolitaire
                 endRound.txtbxResult.Text = "You win!";
                 endRound.pictureBox1.BackgroundImage = Resources.psych;
                 endRound.pictureBox2.BackgroundImage = Resources.greatSuccess;
+                ScoreManager.AddPoints(500);
+            }
+            else
+            {
+                ScoreManager.SubtractPoints(250);
             }
 
             endRound.Show();
@@ -124,10 +129,7 @@ namespace CrazySolitaire
 
                 if (Game.StockReloadCount > 3)
                 {
-                    Game.Explode();
-                    MessageBox.Show("You computer has been infected with ransomware", "You have been infected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    FrmYouLose frmYouLose = new();
-                    frmYouLose.Show();
+                    FrmGame.EndOfRound(false);
                     Hide();
                 }
                 else

@@ -87,7 +87,7 @@
         public Button btnNextRound;
 
         private void btnNextRound_Click(object sender, EventArgs e)
-        {
+        {       
             FrmGame.Instance = null;
             FrmGame frmGame = new();
             frmGame.Show();

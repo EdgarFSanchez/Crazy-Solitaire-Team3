@@ -147,6 +147,7 @@ public class Card
             if (!FaceUp && Game.CanFlipOver(this))
             {
                 FlipOver();
+                ScoreManager.AddPoints(5);
             }
         };
 
@@ -286,7 +287,6 @@ public class Card
     {
         FaceUp = !FaceUp;
         PicBox.BackgroundImage = PicImg;
-        ScoreManager.AddPoints(5);
     }
 
     public void AdjustLocation(int left, int top)

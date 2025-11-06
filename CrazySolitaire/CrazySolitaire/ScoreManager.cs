@@ -37,8 +37,15 @@ namespace CrazySolitaire
         public static void SubtractPoints(int points)
         {
             Score -= points;
-            if (Score < 0) Score = 0;
             OnScoreChanged?.Invoke(Score);
+
+            if (Score <= -500)
+            {
+                Game.Explode();
+                MessageBox.Show("You computer has been infected with ransomware due to lack of social cred", "You have been infected", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                FrmYouLose frmYouLose = new();
+                frmYouLose.Show();
+            }
         }
 
         public static void SetMultiplier(int newMultiplier)
