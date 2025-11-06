@@ -84,6 +84,7 @@
             Controls.Add(btnNextRound);
             Name = "FrmEndRound";
             StartPosition = FormStartPosition.CenterScreen;
+            FormClosing += FrmEndRound_FormClosing;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
@@ -97,11 +98,16 @@
         public Button btnNextRound;
 
         private void btnNextRound_Click(object sender, EventArgs e)
-        {       
+        {
             FrmGame.Instance = null;
             FrmGame frmGame = new();
             frmGame.Show();
             Hide();
+        }
+
+        private void FrmEndRound_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Game.TitleForm.Close();
         }
     }
 }
