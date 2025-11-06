@@ -115,7 +115,7 @@ namespace CrazySolitaire
             {
                 ScoreManager.SubtractPoints(250);
             }
-
+            endRound.txtbxCredit.Text = "You currently have " + ScoreManager.Score + " Social Credit";
             endRound.Show();
             Instance.Hide();
 
