@@ -18,13 +18,14 @@
             txtbxResult = new TextBox();
             pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            txtbxCredit = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // btnNextRound
             // 
-            btnNextRound.Location = new Point(405, 301);
+            btnNextRound.Location = new Point(423, 521);
             btnNextRound.Name = "btnNextRound";
             btnNextRound.Size = new Size(119, 34);
             btnNextRound.TabIndex = 0;
@@ -35,12 +36,12 @@
             // txtbxResult
             // 
             txtbxResult.Enabled = false;
-            txtbxResult.Location = new Point(391, 241);
+            txtbxResult.Location = new Point(329, 463);
             txtbxResult.Name = "txtbxResult";
-            txtbxResult.RightToLeft = RightToLeft.Yes;
-            txtbxResult.Size = new Size(150, 23);
+            txtbxResult.RightToLeft = RightToLeft.No;
+            txtbxResult.Size = new Size(312, 23);
             txtbxResult.TabIndex = 1;
-            txtbxResult.Text = "You Lose";
+            txtbxResult.Text = "You lose, if you reach -500 social credit you will EXPLODE! ";
             txtbxResult.TextAlign = HorizontalAlignment.Center;
             // 
             // pictureBox1
@@ -48,9 +49,9 @@
             pictureBox1.BackColor = Color.FromArgb(0, 0, 64);
             pictureBox1.BackgroundImage = Properties.Resources.feelsSadMan;
             pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox1.Location = new Point(12, 102);
+            pictureBox1.Location = new Point(1, 1);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(373, 390);
+            pictureBox1.Size = new Size(475, 390);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
@@ -59,16 +60,24 @@
             pictureBox2.BackColor = Color.FromArgb(0, 0, 64);
             pictureBox2.BackgroundImage = Properties.Resources.failure;
             pictureBox2.BackgroundImageLayout = ImageLayout.Stretch;
-            pictureBox2.Location = new Point(547, 102);
+            pictureBox2.Location = new Point(482, 1);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(417, 390);
+            pictureBox2.Size = new Size(494, 390);
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
+            // 
+            // txtbxCredit
+            // 
+            txtbxCredit.Location = new Point(378, 492);
+            txtbxCredit.Name = "txtbxCredit";
+            txtbxCredit.Size = new Size(205, 23);
+            txtbxCredit.TabIndex = 4;
             // 
             // FrmEndRound
             // 
             BackColor = Color.FromArgb(64, 0, 64);
             ClientSize = new Size(976, 637);
+            Controls.Add(txtbxCredit);
             Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(txtbxResult);
@@ -84,6 +93,7 @@
         public TextBox txtbxResult;
         public PictureBox pictureBox1;
         public PictureBox pictureBox2;
+        public TextBox txtbxCredit;
         public Button btnNextRound;
 
         private void btnNextRound_Click(object sender, EventArgs e)
