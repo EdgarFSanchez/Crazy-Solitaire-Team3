@@ -22,7 +22,7 @@ namespace CrazySolitaire.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace CrazySolitaire.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CrazySolitaire.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace CrazySolitaire.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _10_of_clubs {
+        public static System.Drawing.Bitmap _10_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("10_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,7 +73,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _10_of_diamonds {
+        public static System.Drawing.Bitmap _10_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("10_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -83,7 +83,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _10_of_hearts {
+        public static System.Drawing.Bitmap _10_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("10_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -93,7 +93,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _10_of_spades {
+        public static System.Drawing.Bitmap _10_of_spades {
             get {
                 object obj = ResourceManager.GetObject("10_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -103,7 +103,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _2_of_clubs {
+        public static System.Drawing.Bitmap _2_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("2_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -113,7 +113,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _2_of_diamonds {
+        public static System.Drawing.Bitmap _2_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("2_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -123,7 +123,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _2_of_hearts {
+        public static System.Drawing.Bitmap _2_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("2_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -133,7 +133,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _2_of_spades {
+        public static System.Drawing.Bitmap _2_of_spades {
             get {
                 object obj = ResourceManager.GetObject("2_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -143,7 +143,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _3_of_clubs {
+        public static System.Drawing.Bitmap _3_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("3_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -153,7 +153,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _3_of_diamonds {
+        public static System.Drawing.Bitmap _3_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("3_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -163,7 +163,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _3_of_hearts {
+        public static System.Drawing.Bitmap _3_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("3_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -173,7 +173,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _3_of_spades {
+        public static System.Drawing.Bitmap _3_of_spades {
             get {
                 object obj = ResourceManager.GetObject("3_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -183,7 +183,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _4_of_clubs {
+        public static System.Drawing.Bitmap _4_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("4_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -193,7 +193,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _4_of_diamonds {
+        public static System.Drawing.Bitmap _4_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("4_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -203,7 +203,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _4_of_hearts {
+        public static System.Drawing.Bitmap _4_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("4_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -213,7 +213,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _4_of_spades {
+        public static System.Drawing.Bitmap _4_of_spades {
             get {
                 object obj = ResourceManager.GetObject("4_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -223,7 +223,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _5_of_clubs {
+        public static System.Drawing.Bitmap _5_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("5_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -233,7 +233,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _5_of_diamonds {
+        public static System.Drawing.Bitmap _5_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("5_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -243,7 +243,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _5_of_hearts {
+        public static System.Drawing.Bitmap _5_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("5_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -253,7 +253,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _5_of_spades {
+        public static System.Drawing.Bitmap _5_of_spades {
             get {
                 object obj = ResourceManager.GetObject("5_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -263,7 +263,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _6_of_clubs {
+        public static System.Drawing.Bitmap _6_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("6_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -273,7 +273,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _6_of_diamonds {
+        public static System.Drawing.Bitmap _6_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("6_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -283,7 +283,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _6_of_hearts {
+        public static System.Drawing.Bitmap _6_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("6_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -293,7 +293,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _6_of_spades {
+        public static System.Drawing.Bitmap _6_of_spades {
             get {
                 object obj = ResourceManager.GetObject("6_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -303,7 +303,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _7_of_clubs {
+        public static System.Drawing.Bitmap _7_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("7_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -313,7 +313,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _7_of_diamonds {
+        public static System.Drawing.Bitmap _7_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("7_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -323,7 +323,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _7_of_hearts {
+        public static System.Drawing.Bitmap _7_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("7_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -333,7 +333,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _7_of_spades {
+        public static System.Drawing.Bitmap _7_of_spades {
             get {
                 object obj = ResourceManager.GetObject("7_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -343,7 +343,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _8_of_clubs {
+        public static System.Drawing.Bitmap _8_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("8_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -353,7 +353,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _8_of_diamonds {
+        public static System.Drawing.Bitmap _8_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("8_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -363,7 +363,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _8_of_hearts {
+        public static System.Drawing.Bitmap _8_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("8_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -373,7 +373,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _8_of_spades {
+        public static System.Drawing.Bitmap _8_of_spades {
             get {
                 object obj = ResourceManager.GetObject("8_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -383,7 +383,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _9_of_clubs {
+        public static System.Drawing.Bitmap _9_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("9_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -393,7 +393,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _9_of_diamonds {
+        public static System.Drawing.Bitmap _9_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("9_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -403,7 +403,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _9_of_hearts {
+        public static System.Drawing.Bitmap _9_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("9_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -413,7 +413,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _9_of_spades {
+        public static System.Drawing.Bitmap _9_of_spades {
             get {
                 object obj = ResourceManager.GetObject("9_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -423,7 +423,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ace_of_clubs {
+        public static System.Drawing.Bitmap ace_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("ace_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -433,7 +433,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ace_of_diamonds {
+        public static System.Drawing.Bitmap ace_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("ace_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -443,7 +443,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ace_of_hearts {
+        public static System.Drawing.Bitmap ace_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("ace_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -453,7 +453,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ace_of_spades {
+        public static System.Drawing.Bitmap ace_of_spades {
             get {
                 object obj = ResourceManager.GetObject("ace_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -463,7 +463,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap back_green {
+        public static System.Drawing.Bitmap back_green {
             get {
                 object obj = ResourceManager.GetObject("back_green", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -473,7 +473,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap back_orange {
+        public static System.Drawing.Bitmap back_orange {
             get {
                 object obj = ResourceManager.GetObject("back_orange", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -483,7 +483,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap back_red {
+        public static System.Drawing.Bitmap back_red {
             get {
                 object obj = ResourceManager.GetObject("back_red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -493,7 +493,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap black_joker {
+        public static System.Drawing.Bitmap black_joker {
             get {
                 object obj = ResourceManager.GetObject("black_joker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -503,7 +503,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FoundationStackBg_Clubs {
+        public static System.Drawing.Bitmap FoundationStackBg_Clubs {
             get {
                 object obj = ResourceManager.GetObject("FoundationStackBg_Clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -513,7 +513,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FoundationStackBg_Diamonds {
+        public static System.Drawing.Bitmap FoundationStackBg_Diamonds {
             get {
                 object obj = ResourceManager.GetObject("FoundationStackBg_Diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -523,7 +523,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FoundationStackBg_Hearts {
+        public static System.Drawing.Bitmap FoundationStackBg_Hearts {
             get {
                 object obj = ResourceManager.GetObject("FoundationStackBg_Hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -533,7 +533,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FoundationStackBg_Spades {
+        public static System.Drawing.Bitmap FoundationStackBg_Spades {
             get {
                 object obj = ResourceManager.GetObject("FoundationStackBg_Spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -543,7 +543,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hq720 {
+        public static System.Drawing.Bitmap hq720 {
             get {
                 object obj = ResourceManager.GetObject("hq720", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -553,7 +553,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap jack_of_clubs {
+        public static System.Drawing.Bitmap jack_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("jack_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -563,7 +563,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap jack_of_diamonds {
+        public static System.Drawing.Bitmap jack_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("jack_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -573,7 +573,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap jack_of_hearts {
+        public static System.Drawing.Bitmap jack_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("jack_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -583,7 +583,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap jack_of_spades {
+        public static System.Drawing.Bitmap jack_of_spades {
             get {
                 object obj = ResourceManager.GetObject("jack_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -593,7 +593,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap king_of_clubs {
+        public static System.Drawing.Bitmap king_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("king_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -603,7 +603,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap king_of_diamonds {
+        public static System.Drawing.Bitmap king_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("king_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -613,7 +613,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap king_of_hearts {
+        public static System.Drawing.Bitmap king_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("king_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -623,7 +623,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap king_of_spades {
+        public static System.Drawing.Bitmap king_of_spades {
             get {
                 object obj = ResourceManager.GetObject("king_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -633,7 +633,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap latest1 {
+        public static System.Drawing.Bitmap latest1 {
             get {
                 object obj = ResourceManager.GetObject("latest1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -643,7 +643,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap queen_of_clubs {
+        public static System.Drawing.Bitmap queen_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("queen_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -653,7 +653,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap queen_of_diamonds {
+        public static System.Drawing.Bitmap queen_of_diamonds {
             get {
                 object obj = ResourceManager.GetObject("queen_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -663,7 +663,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap queen_of_hearts {
+        public static System.Drawing.Bitmap queen_of_hearts {
             get {
                 object obj = ResourceManager.GetObject("queen_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -673,7 +673,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap queen_of_spades {
+        public static System.Drawing.Bitmap queen_of_spades {
             get {
                 object obj = ResourceManager.GetObject("queen_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -683,7 +683,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap ransom {
+        public static System.Drawing.Bitmap ransom {
             get {
                 object obj = ResourceManager.GetObject("ransom", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -693,7 +693,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap red_joker {
+        public static System.Drawing.Bitmap red_joker {
             get {
                 object obj = ResourceManager.GetObject("red_joker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -703,7 +703,7 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap shopbg {
+        public static System.Drawing.Bitmap shopbg {
             get {
                 object obj = ResourceManager.GetObject("shopbg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -713,9 +713,19 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap title {
+        public static System.Drawing.Bitmap title {
             get {
                 object obj = ResourceManager.GetObject("title", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap wild_card {
+            get {
+                object obj = ResourceManager.GetObject("wild_card", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
