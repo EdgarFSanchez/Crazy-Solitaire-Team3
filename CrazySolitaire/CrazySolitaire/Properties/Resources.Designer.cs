@@ -503,6 +503,26 @@ namespace CrazySolitaire.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap failure {
+            get {
+                object obj = ResourceManager.GetObject("failure", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap feelsSadMan {
+            get {
+                object obj = ResourceManager.GetObject("feelsSadMan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap FoundationStackBg_Clubs {
             get {
                 object obj = ResourceManager.GetObject("FoundationStackBg_Clubs", resourceCulture);
@@ -536,6 +556,16 @@ namespace CrazySolitaire.Properties {
         public static System.Drawing.Bitmap FoundationStackBg_Spades {
             get {
                 object obj = ResourceManager.GetObject("FoundationStackBg_Spades", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap greatSuccess {
+            get {
+                object obj = ResourceManager.GetObject("greatSuccess", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -636,6 +666,16 @@ namespace CrazySolitaire.Properties {
         public static System.Drawing.Bitmap latest1 {
             get {
                 object obj = ResourceManager.GetObject("latest1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap psych {
+            get {
+                object obj = ResourceManager.GetObject("psych", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

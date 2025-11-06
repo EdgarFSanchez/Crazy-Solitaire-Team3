@@ -101,12 +101,14 @@ namespace CrazySolitaire
         private bool _suppressHotkeys = false;
         public void SetHotkeysSuppressed(bool value) => _suppressHotkeys = value;
 
-        public static void EndOfRound(Boolean x)
+        public static void EndOfRound(Boolean win)
         {
             FrmEndRound endRound = new();
-            if (x)
+            if (win)
             {
                 endRound.txtbxResult.Text = "You win!";
+                endRound.pictureBox1.BackgroundImage = Resources.psych;
+                endRound.pictureBox2.BackgroundImage = Resources.greatSuccess;
             }
 
             endRound.Show();
@@ -248,9 +250,9 @@ namespace CrazySolitaire
                 ActivateDoublePoints();
             }
 
-            if (e.KeyCode == Keys.E)
+            if (e.KeyCode == Keys.P)
             {
-                EndOfRound(true);
+                EndOfRound(false);
             }
             
             if (e.KeyCode == Keys.W)
