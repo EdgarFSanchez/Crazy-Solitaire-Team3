@@ -327,7 +327,6 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
             {
                 c.Suit = Suit.HEARTS;
             }
-
         }
         Cards.AddLast(c);
         Panel.AddCard(c);
@@ -363,10 +362,26 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
             Panel.BackColor = Color.Red;
         }
     }
-
+    
+    /// <summary>
+    /// Checks to see if card is valid to be dropped into Tableau stack
+    /// </summary>
+    /// <param name="c"> c is the card user is holding </param>
+    /// <returns></returns>
     public bool CanDrop(Card c) {
         if (c.IsWildCard)
         {
+            // If there's a card underneath the Wild Card OR card underneath is ACE it can no longer be moved to any tableau stack
+            if (FrmGame.CurDragCards.Count > 1 || Cards.Last.Value.Type == CardType.ACE)
+            {
+                // If the last card in the Tableau stack is valid for the WildCard current type & suit
+                if (Cards.Last.Value.Type == c.Type + 1 && (int) Cards.Last.Value.Suit % 2 != (int) c.Suit % 2)
+                {
+                    return true;
+                }
+                return false;       
+
+            }
             return true;
         }
 
