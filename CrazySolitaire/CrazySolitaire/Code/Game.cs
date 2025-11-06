@@ -314,6 +314,13 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
 
     public void AddCard(Card c)
     {
+        //check first to see if its just the wildcard in the tableau
+        if(Cards.Count == 1 && Cards.First.Value.IsWildCard == true)
+        {
+            //if so set the wildcard to validate the new cards beneath it
+            Cards.First.Value.Type = c.Type + 1;
+            Cards.First.Value.Suit = (Suit)(((int)c.Suit % 2) + 1); //suit is enum so cast to int, mod and add one so suit of wildcard will be different than new card, then re-cast to suit
+        }
         c.IsIn = this;
 
         if (c.IsWildCard)
@@ -392,6 +399,10 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
 
         if (Cards.Count == 0) {
             return c.Type == CardType.KING;
+        }
+        else if(Cards.Count == 1 && Cards.First.Value.IsWildCard == true) //allow dropping for lone wildcard in tableau
+        {
+            return true;
         }
         else
         {
