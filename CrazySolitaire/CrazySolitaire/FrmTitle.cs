@@ -9,6 +9,7 @@
         }
 
         private void btnStartGame_Click(object sender, EventArgs e) {
+            ScoreManager.Reset();
             FrmGame frmGame = new();
             frmGame.Show();
             Hide();
