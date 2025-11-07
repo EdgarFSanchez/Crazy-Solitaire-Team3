@@ -30,6 +30,9 @@ namespace CrazySolitaire
             btnResetBg.Text = "Default";
             StyleGameButton(btnResetBg, Color.ForestGreen, Color.White);
 
+            // Wild Card buy button (designer button under the white card)
+            StyleGameButton(btnWildBuy, Color.Gold, Color.Black);
+
             // First paint the labels
             UpdateSocialCreditText();
             UpdateBgButtonsUi();
@@ -149,6 +152,8 @@ namespace CrazySolitaire
 
         private const int BtnMinW = 110;
         private const int BtnMinH = 36;
+
+        private const int WildPrice = 2000;
 
         // ======= Button styling =======
 
@@ -324,5 +329,45 @@ namespace CrazySolitaire
         private void bglbl_Click(object sender, EventArgs e) { }
         private void storelbl_Click(object sender, EventArgs e) { }
         private void Sclbl_Click(object sender, EventArgs e) { }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Purchase and spawn a Wild Card (2000 Social Credit).
+        /// Prevents charging if one is already active.
+        /// </summary>
+        /// <param name="sender">object: Source of the event (the Wild Card buy button).</param>
+        /// <param name="e">EventArgs: Click event data.</param>
+        private void btnWildBuy_Click(object sender, EventArgs e)
+        {
+            // Already have one active? Do not charge.
+            if (Game.WildCard != null)
+            {
+                MessageBox.Show("You already have a Wild Card active. Use it first!");
+                return;
+            }
+
+            // Not enough credit guard
+            if (ScoreManager.Score < WildPrice)
+            {
+                MessageBox.Show($"You need {WildPrice} Social Credit to buy this modifier.");
+                return;
+            }
+
+            // Spawn first, then charge (avoids charging if the game rejects).
+            var before = Game.WildCard;
+            Game.SpawnWildCard();
+
+            // If spawn did nothing (still the same reference), skip charging.
+            if (ReferenceEquals(Game.WildCard, before))
+                return;
+
+            // Deduct price and refresh UI
+            ScoreManager.SubtractPoints(WildPrice);
+            UpdateSocialCreditText();
+        }
     }
 }

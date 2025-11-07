@@ -40,9 +40,12 @@
             Modlbl = new Label();
             label1 = new Label();
             pictureBox2 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            btnWildBuy = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lebron).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // pictureBox1
@@ -97,7 +100,7 @@
             // 
             button3.BackColor = Color.Gold;
             button3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.Location = new Point(67, 427);
+            button3.Location = new Point(51, 455);
             button3.Name = "button3";
             button3.Size = new Size(80, 37);
             button3.TabIndex = 10;
@@ -174,7 +177,7 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Black", 36F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             label1.ForeColor = Color.FromArgb(128, 128, 255);
-            label1.Location = new Point(62, 348);
+            label1.Location = new Point(46, 376);
             label1.Name = "label1";
             label1.Size = new Size(85, 65);
             label1.TabIndex = 16;
@@ -191,6 +194,30 @@
             pictureBox2.TabIndex = 17;
             pictureBox2.TabStop = false;
             // 
+            // pictureBox3
+            // 
+            pictureBox3.BackColor = Color.Transparent;
+            pictureBox3.BackgroundImage = Properties.Resources.wild_card;
+            pictureBox3.BackgroundImageLayout = ImageLayout.Stretch;
+            pictureBox3.Location = new Point(209, 325);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(108, 124);
+            pictureBox3.TabIndex = 18;
+            pictureBox3.TabStop = false;
+            pictureBox3.Click += pictureBox3_Click;
+            // 
+            // btnWildBuy
+            // 
+            btnWildBuy.BackColor = Color.Gold;
+            btnWildBuy.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnWildBuy.Location = new Point(209, 455);
+            btnWildBuy.Name = "btnWildBuy";
+            btnWildBuy.Size = new Size(80, 37);
+            btnWildBuy.TabIndex = 19;
+            btnWildBuy.Text = "BUY";
+            btnWildBuy.UseVisualStyleBackColor = false;
+            btnWildBuy.Click += btnWildBuy_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -199,6 +226,8 @@
             BackgroundImage = Properties.Resources.shopbg;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(976, 637);
+            Controls.Add(btnWildBuy);
+            Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
             Controls.Add(label1);
             Controls.Add(Modlbl);
@@ -216,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)lebron).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -233,5 +263,7 @@
         private Label Modlbl;
         private Label label1;
         private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
+        private Button btnWildBuy;
     }
 }
