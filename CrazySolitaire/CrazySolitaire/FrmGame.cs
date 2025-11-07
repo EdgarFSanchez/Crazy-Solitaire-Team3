@@ -7,21 +7,41 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace CrazySolitaire
 {
+    /// <summary>
+    /// Main game form for Crazy Solitaire
+    /// </summary>
     public partial class FrmGame : Form
     {
+        /// <summary>
+        /// The currently dragged cards during a drag operation
+        /// </summary>
         public static LinkedList<Card> CurDragCards { get; private set; } = new();
+
+        /// <summary>
+        /// The source from which the current set of cards is being dragged.
+        /// </summary>
         public static IDragFrom CardsDraggedFrom { get; private set; }
+
+        /// <summary>
+        /// Singleton-like reference to the active game from instance
+        /// </summary>
         internal static FrmGame Instance { get; set; }
 
-        private System.Windows.Forms.Timer doublePointsTimer;           // timer to count down duration
-        private bool isDoublePointsActive = false;                      // flag to prevent multiple activations
+        private System.Windows.Forms.Timer doublePointsTimer;           // Timer for tracking Double Points
+        private bool isDoublePointsActive = false;                      // Indicates whether Double Points mode is currently active
 
-        // Random events: thin game surface + scheduler
+        // Game logic components - handle random events and gameplay scheduling
         private IGameApi _gameApi;
         private RandomEventManager _eventManager;
 
+        /// <summary>
+        /// Stores the current background theme ID.
+        /// </summary>
         public string CurrentBackgroundId { get; private set; } = "";
 
+        /// <summary>
+        /// Enables double buffering to prevent flicker
+        /// </summary>
         protected override CreateParams CreateParams
         {
             get
@@ -37,17 +57,24 @@ namespace CrazySolitaire
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Sets up the game form and initalizes all starting components
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             Instance = this;
             KeyPreview = true;
 
+            // Grab all 7 tableau stack panels
             Panel[] panTableauStacks = new Panel[7];
             for (int i = 0; i < 7; i++)
             {
                 panTableauStacks[i] = (Panel)Controls.Find($"panTableauStack_{i}", false)[0];
             }
 
+            // Map each suit to its foundation panel
             Dictionary<Suit, Panel> panFoundationStacks = new()
             {
                 [Suit.DIAMONDS] = panFoundationStack_Diamonds,
@@ -56,6 +83,7 @@ namespace CrazySolitaire
                 [Suit.CLUBS] = panFoundationStack_Clubs,
             };
 
+            // Initialize main game logic and layout
             Game.Init(panTalon, panTableauStacks, panFoundationStacks);
 
             // Random events: wire up manager and tune pacing
@@ -69,10 +97,12 @@ namespace CrazySolitaire
                 MaxPerEventPerGame = 3,
                 MinSecondsBetweenEvents = 7
             };
+
             // Eligible events and their relative weights
             _eventManager.Register(new CaptchaEvent { Weight = 7 });
             _eventManager.Register(new CursorShakeEvent { Weight = 8 });
 
+            // Timer for double points duration
             doublePointsTimer = new System.Windows.Forms.Timer { Interval = 10_000 };
             doublePointsTimer.Tick += (s, e) =>
             {
@@ -87,20 +117,26 @@ namespace CrazySolitaire
                 SetScoreLabelForBackground(CurrentBackgroundId);
             };
 
-            // Only reset multiplier, not score, when starting a new round
+            // Update score display
             ScoreManager.OnScoreChanged += (score) => { lblScore.Text = $"Social Cred: {score}"; };
-            lblScore.Text = $"Social Cred: {ScoreManager.Score}"; // set initial label
+            lblScore.Text = $"Social Cred: {ScoreManager.Score}"; 
 
+
+            // Reset background and settings to default
             ClearBackgroundToDefaultGreen();
             SetScoreLabelForBackground("");
             CrazySolitaire.Properties.Settings.Default.SelectedBackgroundId = "";
             CrazySolitaire.Properties.Settings.Default.Save();
         }
 
-        // lets events (like captcha) temporarily disable hotkeys
+        // Allows random events (like captcha) to temporarily disable hotkeys
         private bool _suppressHotkeys = false;
         public void SetHotkeysSuppressed(bool value) => _suppressHotkeys = value;
 
+        /// <summary>
+        /// Handles the end of a round, showing results and rewarding score.
+        /// </summary>
+        /// <param name="win"></param>
         public static void EndOfRound(Boolean win)
         {
             FrmEndRound endRound = new();
@@ -121,6 +157,11 @@ namespace CrazySolitaire
 
         }
 
+        /// <summary>
+        /// Handles clicks on the stock pile to draw or reload cards.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pbStock_Click(object sender, EventArgs e)
         {
             if (pbStock.BackgroundImage is null)
@@ -140,6 +181,7 @@ namespace CrazySolitaire
 
                     Game.Talon.ReleaseIntoDeck(Game.Deck);
 
+                    // Change card back color as damage indicator
                     pbStock.BackgroundImage = Game.StockReloadCount switch
                     {
                         1 => Resources.back_green,
@@ -151,6 +193,7 @@ namespace CrazySolitaire
             }
             else
             {
+                // Draw one card from the deck
                 for (int i = 0; i < 1; i++)
                 {
                     Card c = Game.Deck.Acquire();
@@ -167,23 +210,37 @@ namespace CrazySolitaire
                 {
                     pbStock.BackgroundImage = null;
                 }
-                // notify the scheduler that a draw just happened
-                _eventManager.OnCardDrawn();
+                _eventManager.OnCardDrawn();        // Notify the scheduler that a draw just happened
             }
         }
 
+        /// <summary>
+        /// Sets the form background image
+        /// </summary>
+        /// <param name="img">The image we want to select</param>
+        /// <param name="layout">Nice fit for the image to be displayed</param>
         public void ApplyBackground(Image img, ImageLayout layout = ImageLayout.Stretch)
         {
             this.BackgroundImage = img;
             this.BackgroundImageLayout = layout;
         }
 
+        /// <summary>
+        /// Fix score text box when Lebron Background is selected
+        /// </summary>
+        /// <param name="id">The ID of the Lebron image</param>
         public void SetScoreLabelForBackground(string id)
         {
             lblScore.ForeColor = (id == "lebron") ? Color.Black : Color.White;
         }
 
 
+        /// <summary>
+        /// Applies a backgroun image and updates the background ID.
+        /// </summary>
+        /// <param name="img">The image to display as the background</param>
+        /// <param name="id">A unique ID for the selected background</param>
+        /// <param name="layout">Nice fit for the image to be displayed</param>
         public void ApplyBackgroundWithId(Image img, string id, ImageLayout layout = ImageLayout.Stretch)
         {
             this.BackgroundImage = img;
@@ -192,6 +249,9 @@ namespace CrazySolitaire
             SetScoreLabelForBackground(id);
         }
 
+        /// <summary>
+        /// Resets background to the defualt green table color.
+        /// </summary>
         public void ClearBackgroundToDefaultGreen()
         {
             this.BackgroundImage = null;
@@ -212,6 +272,11 @@ namespace CrazySolitaire
         }
         public static bool IsDraggingCard(Card c) => CurDragCards.Contains(c);
 
+        /// <summary>
+        /// Cleans up timers and active events when the form closes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmGame_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (doublePointsTimer != null)
@@ -219,24 +284,13 @@ namespace CrazySolitaire
                 doublePointsTimer.Stop();
                 doublePointsTimer.Dispose();
             }
-            // cleanly stop anything still running
-            _eventManager?.CancelActiveEvents();
+            _eventManager?.CancelActiveEvents();        // Cleanly stop anything still running
             Game.TitleForm.Close();
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            // allow overlays to suppress hotkeys while active
-            if (_suppressHotkeys) return base.ProcessCmdKey(ref msg, keyData);
-
-            if (keyData == Keys.D && !isDoublePointsActive)
-            {
-                ActivateDoublePoints();
-                return true;
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
+        /// <summary>
+        /// Activates the Double Points mode temporarily.
+        /// </summary>
         private void ActivateDoublePoints()
         {
             isDoublePointsActive = true;
@@ -245,24 +299,33 @@ namespace CrazySolitaire
             doublePointsTimer.Start();
         }
 
+        /// <summary>
+        /// Handles keyboard shortcuts for round events and power-ups. (For testing)
+        /// </summary>
         private void FrmGame_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D && !isDoublePointsActive)
-            {
-                ActivateDoublePoints();
-            }
+            // Allow overlays to suppress hotkeys while active
+            if (_suppressHotkeys) return;
 
-            if (e.KeyCode == Keys.P)
+            switch (e.KeyCode)
             {
-                EndOfRound(false);
-            }
-            
-            if (e.KeyCode == Keys.W)
-            {
-                Game.SpawnWildCard();
+                case Keys.D when !isDoublePointsActive:
+                    ActivateDoublePoints();
+                    break;
+                case Keys.P:
+                    EndOfRound(false);
+                    break;
+                case Keys.W:
+                    Game.SpawnWildCard();
+                    break;
             }
         }
 
+        /// <summary>
+        /// Opens the in-game store window.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Store_Click(object sender, EventArgs e)
         {
             using (var store = new Form1())
@@ -272,10 +335,18 @@ namespace CrazySolitaire
             }
         }
 
-        // minimal surface the events can call into
+        /// <summary>
+        /// Provides a minimal interface that random events can use to interact with the game.
+        /// Prevents events from directly manipulating the full game state.
+        /// </summary>
         private sealed class GameApi : IGameApi
         {
-            private readonly FrmGame _form;
+            private readonly FrmGame _form;                  
+            
+            /// <summary>
+            /// Constructor assigns the form reference above
+            /// </summary>
+            /// <param name="form"></param>
             public GameApi(FrmGame form) { _form = form; }
 
             public bool IsBusyAnimating => false;
