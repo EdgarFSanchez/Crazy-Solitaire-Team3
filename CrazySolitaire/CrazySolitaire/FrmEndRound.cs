@@ -101,6 +101,7 @@
         {
             FrmGame.Instance = null;
             FrmGame frmGame = new();
+            Game.StockReloadCount = 0; //reset the deck stock count
             frmGame.Show();
             Hide();
         }
