@@ -105,6 +105,7 @@
             Hide();
         }
 
+        //when the game is closed close the title form to prevent resource leak
         private void FrmEndRound_FormClosing(object sender, FormClosingEventArgs e)
         {
             Game.TitleForm.Close();
