@@ -632,7 +632,7 @@ public static class Game
     public static TableauStack[] TableauStacks;
     public static Talon Talon { get; set; }
     public static int StockReloadCount { get; set; } //counter for how many times the deck has been refreshed
-    public static Card WildCard = null; //flag for if a wildcard is in play
+    public static Card WildCard = null; //instance for wildcard
 
 
     static Game()
@@ -794,11 +794,18 @@ public static class Game
     /// </summary>
     public static void checkWin()
     {
+        
+       
         foreach (TableauStack t in TableauStacks)
         {
             if (t.Cards.Count != 0)
             {
-                return;
+                //check if it is a wildcard leftover
+                if (t.Cards.Count != 1 || t.Cards.First.Value != WildCard)
+                {
+                    return;
+                }
+                    
             }
         }
 
