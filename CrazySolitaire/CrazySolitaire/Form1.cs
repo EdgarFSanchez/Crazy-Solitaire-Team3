@@ -26,7 +26,7 @@ namespace CrazySolitaire
             // Button styling
             StyleGameButton(goodmanbtn, Color.Gold, Color.Black);
             StyleGameButton(button2, Color.Gold, Color.Black);
-            StyleGameButton(button3, Color.MediumPurple, Color.White);
+            StyleGameButton(button3, Color.Gold, Color.Black);
             btnResetBg.Text = "Default";
             StyleGameButton(btnResetBg, Color.ForestGreen, Color.White);
 
