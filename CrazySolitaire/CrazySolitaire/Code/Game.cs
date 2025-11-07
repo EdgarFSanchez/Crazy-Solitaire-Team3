@@ -100,11 +100,10 @@ public class Card
     public CardType Type { get; set; }
     public Suit Suit { get; set; }
     public bool FaceUp { get; private set; }
-    public bool IsWildCard { get; set; } = false;       // 
-    public bool HasScoredInFoundation { get; set; } = false;
+    public bool IsWildCard { get; set; } = false; //flag to refer to when checking if a card is a wildcard in methods
     public PictureBox PicBox { get; private set; }
     internal TableauStack IsIn { get; set; }//tableau stack that card is currently in
-    // internal FoundationStack Foundation {  get; set; }//foundation stack that card is currently in
+    
 
     /// <summary>
     /// Gets the appropriate image for the card based on its current state
@@ -141,6 +140,9 @@ public class Card
         SetupPicBox();
     }
 
+    /// <summary>
+    /// Creates the picture box of the card and handles the picking up, dragging, and placing of the card.
+    /// </summary>
     private void SetupPicBox()
     {
         PicBox = new()
@@ -159,36 +161,41 @@ public class Card
             }
         };
 
+        // handles picking up cards, changed to handle dragging multiple valid cards
         PicBox.MouseDown += (sender, e) => {
              if (e.Button == MouseButtons.Left && Game.IsCardMovable(this))
             {
-                //changed to handle dragging multiple valid cards
+                
                 //if in a tableau stack
                 if (this.IsIn != null)
                 {
-                    //a list of all the cards that are draggable
-                    List<Card> movables = this.IsIn.FindMoveableCards();
-                    //find the point in the stack that is being dragged
-                    int index = movables.IndexOf(this);
+                    
+                    List<Card> movables = this.IsIn.FindMoveableCards(); //grab a list of all the cards that are draggable
+                    
+                    int index = movables.IndexOf(this);//find the point in the stack that is being dragged
 
                     //drag all the other cards
                     while (index < movables.Count)
                     {
+                        //handle the card being dragged by the cursor
                         if(index == 0)
                         {
-                            FrmGame.DragCard(movables[index]);
-                            movables[index].dragOffset = e.Location;
-                            movables[index].conBeforeDrag = movables[index].PicBox.Parent;
-                            movables[index].relLocBeforeDrag = movables[index].PicBox.Location;
+                            //in the following. movables[index] refers to a specific card in the list of movable cards
+                            FrmGame.DragCard(movables[index]); 
+                            movables[index].dragOffset = e.Location; //set drag offset equal to the location of the cursor on the picBox
+                            movables[index].conBeforeDrag = movables[index].PicBox.Parent; //grab the control that the card is in
+                            movables[index].relLocBeforeDrag = movables[index].PicBox.Location; //grab the coordinates of the card relative to its parent
                             conBeforeDrag.RemCard(movables[index]);
                             FrmGame.Instance.AddCard(movables[index]);
-                            Point loc = movables[index].conBeforeDrag.Location;
-                            movables[index].PicBox.Location = new Point(loc.X, loc.Y + (relLocBeforeDrag.Y));
+                            Point loc = movables[index].conBeforeDrag.Location; //create a point for the cards location after being picked up
+                            movables[index].PicBox.Location = new Point(loc.X, loc.Y + (relLocBeforeDrag.Y)); //set card's new location based on screen coordinates
                             movables[index].PicBox.BringToFront();
                             index++;
                         }
+                        //handle the rest of the movables
                         else
                         {
+                            //same as index 0 except the new point loc
                             FrmGame.DragCard(movables[index]);
                             movables[index].dragOffset = e.Location;
                             movables[index].conBeforeDrag = movables[index].PicBox.Parent;
@@ -196,16 +203,16 @@ public class Card
                             conBeforeDrag.RemCard(movables[index]);
                             FrmGame.Instance.AddCard(movables[index]);
                             Point loc = movables[index].conBeforeDrag.Location;
-                            movables[index].PicBox.Location = new Point(1000,1000);
+                            movables[index].PicBox.Location = new Point(1000,1000); //set the location of each card below the main card being dragged to off-screen
                             movables[index].PicBox.BringToFront();
                             index++;
                         }
                         
                     }
                 }
+                //otherwise card is coming from talon or foundation
                 else
                 {
-                    //otherwise card is coming from talon or foundation, indifferent from original code
                     FrmGame.DragCard(this);
                     dragOffset = e.Location;
                     conBeforeDrag = PicBox.Parent;
@@ -218,9 +225,11 @@ public class Card
                 }
             }
         };
+        //handles dropping cards, altered to handle droping a linkedlist of cards
         PicBox.MouseUp += (sender, e) => {
-            if (FrmGame.CurDragCards.Contains(this))//altered from original to work with linkedlist
+            if (FrmGame.CurDragCards.Contains(this))
             {
+                //cards deemed valid to be placed
                 if (lastDropTarget is not null && lastDropTarget.CanDrop(this))
                 {
                     //iterate through each card that is currently being dragged and drop them on the control
@@ -232,6 +241,7 @@ public class Card
                     }
 
                 }
+                //cards deemed invalid
                 else
                 {
                     //otherwise put the cards back where they belong
@@ -243,15 +253,15 @@ public class Card
                         c.PicBox.BringToFront();
                     }
                 }
-                FrmGame.StopDragCard(this);
-                Game.CallDragEndedOnAll();
+                FrmGame.StopDragCard(this); 
+                Game.CallDragEndedOnAll();//remove any remaining highlighted columns
             }
         };
 
-        //may need to look at this to fix cards in top right
-        //relLocBeforeDrag is just where the cursor was on the original control, not scaled for whole screen
+        //handles dragging cards, slightly altered for linkedlist of dragged cards
         PicBox.MouseMove += (sender, e) => 
         {
+            //changed this to grab from the linkedlist version of CurDragCards
             if (FrmGame.CurDragCards.Contains(this))
             {
                     var dragged = (Control)sender;
@@ -266,22 +276,25 @@ public class Card
                     // Avoid detecting the dragged control itself
                     if (target is not null && target != dragged)
                     {
-                        var dropTarget = Game.FindDropTarget(target);
+                        var dropTarget = Game.FindDropTarget(target); //find the control underneath the card
                         if (dropTarget is null)
                         {
-                            Game.CallDragEndedOnAll();
+                            Game.CallDragEndedOnAll();  //card is hovering over nothing, remove highlights
                         }
+                        //card has moved from target
                         else if (dropTarget != lastDropTarget)
                         {
-                            lastDropTarget?.DragEnded();
+                            lastDropTarget?.DragEnded(); //remove the highlight from the previous target
                         }
+                        //card has dragged over a new target
                         if (dropTarget != FrmGame.CardsDraggedFrom as IDropTarget)
                         {
-                            dropTarget?.DragOver(this);
-                            lastDropTarget = dropTarget;
+                            dropTarget?.DragOver(this); //call targets drag functons, highlight
+                            lastDropTarget = dropTarget; //set this target to last target
                         }
                     }
 
+                    //redraw the card
                     dragged.Location = new Point(
                         parentPos.X - dragOffset.X,
                         parentPos.Y - dragOffset.Y
@@ -328,17 +341,19 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
         //check first to see if its just the wildcard in the tableau
         if(Cards.Count == 1 && Cards.First.Value.IsWildCard == true)
         {
-            //if so set the wildcard to validate the new cards beneath it
-            Cards.First.Value.Type = c.Type + 1;
-            Cards.First.Value.Suit = (Suit)(((int)c.Suit % 2) + 1); //suit is enum so cast to int, mod and add one so suit of wildcard will be different than new card, then re-cast to suit
+            Cards.First.Value.Type = c.Type + 1; //set wildcards type to be one higher than the card added below it
+            Cards.First.Value.Suit = (Suit)(((int)c.Suit % 2) + 1); //suit is enum so cast to int, mod and add one so suit of wildcard will be different than new card, then re-cast to suit. Doesnt matter what suit as long as different color. //dont know whether to be proud or horrified of the right side.
         }
-        c.IsIn = this;
+        c.IsIn = this; //set what tableau stack the card is in
 
+        // handle the wildcard differently
         if (c.IsWildCard)
         {
+            //if the tableau stack is not empty, i.e. adding beneath a card
             if(Cards.Count != 0)
             {
-                c.Type = c.IsIn.Cards.Last.Value.Type - 1;
+
+                c.Type = c.IsIn.Cards.Last.Value.Type - 1; //set the type to be one less than the card above
                 if ((int)c.IsIn.Cards.Last.Value.Suit % 2 == 0)
                 {
                     c.Suit = Suit.SPADES;
@@ -352,14 +367,18 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
         Cards.AddLast(c);
         Panel.AddCard(c);
         c.PicBox.BringToFront();
-
     }
-
+    /// <summary>
+    /// return a list of movable cards
+    /// </summary>
+    /// <returns>[] if no movable cards</returns>
     public List<Card> FindMoveableCards()
     {
         List<Card> cards = new();
+        //if tableau not empty
         if (Cards.Count != 0)
         {
+            //iterate through tableaus cards and add moveable one to list
             foreach (Card c in Cards)
             {
                 if (c.FaceUp)
@@ -369,9 +388,10 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
             }
         }
 
-        return Cards.Count > 0 ? cards : [];
+        return Cards.Count > 0 ? cards : []; //return list or empty list if null+
     }
-
+    
+    //highlights the control if dragged over
     public void DragOver(Card c)
     {
         if (CanDrop(c))
@@ -388,7 +408,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
     /// Checks to see if card is valid to be dropped into Tableau stack
     /// </summary>
     /// <param name="c"> c is the card user is holding </param>
-    /// <returns></returns>
+    /// <returns>bool</returns>
     public bool CanDrop(Card c) {
         if (c.IsWildCard)
         {
@@ -398,7 +418,7 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
                 // If there's a card underneath the Wild Card OR card underneath is ACE it can no longer be moved to any tableau stack
                 if (FrmGame.CurDragCards.Count > 1 || Cards.Last.Value.Type == CardType.ACE)
                 {
-                    // If the last card in the Tableau stack is valid for the WildCard current type & suit
+                    //return false if the card that the wild will be placed under isnt the 1 type greater or is the same color
                     if (Cards.Last.Value.Type != c.Type + 1 || (int) Cards.Last.Value.Suit % 2 == (int) c.Suit % 2)
                     {
                         return false;
@@ -408,13 +428,16 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
             return true;
         }
 
+        //tableau is empty the only valid cards are king or wild
         if (Cards.Count == 0) {
             return c.Type == CardType.KING;
         }
-        else if(Cards.Count == 1 && Cards.First.Value.IsWildCard == true) //allow dropping for lone wildcard in tableau
+        //allow dropping for lone wildcard in tableau
+        else if(Cards.Count == 1 && Cards.First.Value.IsWildCard == true) 
         {
             return true;
         }
+        //otherwise have to check if card is valid to be placed under target card
         else
         {
             Card lastCard = Cards.Last.Value;
@@ -423,7 +446,8 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
             return (suitCheck && typeCheck);
         }
     }
-
+    
+    //card is dropped on tableau
     public void Dropped(Card c) {
         AddCard(c);
         FrmGame.Instance.RemCard(c);
@@ -435,13 +459,14 @@ public class TableauStack : IFindMoveableCards, IDropTarget, IDragFrom
             ScoreManager.AddPoints(10);         
         }
 
-        c.AdjustLocation(0, (Cards.Count - 1) * 20);
+        c.AdjustLocation(0, (Cards.Count - 1) * 20); //set the new location underneath the last card in the stack
         c.PicBox.BringToFront();
         Panel.Refresh();
         c.PicBox.BringToFront();
 
     }
 
+    //gets rid of highlights after no longer being dragged over
     public void DragEnded()
     {
         Panel.BackColor = Color.Transparent;
@@ -469,8 +494,13 @@ public class Talon : IFindMoveableCards, IDragFrom
         Cards = new();
     }
 
+    /// <summary>
+    /// Puts cards from the talon back into the deck
+    /// </summary>
+    /// <param name="deck"></param>
     public void ReleaseIntoDeck(Deck deck)
     {
+        //start at the back of Cards so that the order of the deck is maintained
         foreach (var card in Cards.Reverse())
         {
             deck.Release(card);
@@ -523,6 +553,11 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
         }
     }
 
+    /// <summary>
+    /// Determines if a card can be placed into the foundation stack.
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     public bool CanDrop(Card c)
     {
         // if card is a Wild Card, it can't drop into foundation stack
@@ -536,14 +571,14 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
         bool suitCheck;
         bool typeCheck;
 
-        suitCheck = Suit == c.Suit;
+        suitCheck = Suit == c.Suit; //if card's suit matches the foundation's suit, true or false
         if (topCard is null)
         {
-            typeCheck = c.Type == CardType.ACE;
+            typeCheck = c.Type == CardType.ACE; //if card's type matches the only valid type, true or false
         }
         else
         {
-            typeCheck = topCard.Type == c.Type - 1;
+            typeCheck = topCard.Type == c.Type - 1; //card being added must be one greater than the top card
         }
         if (typeCheck && suitCheck)
         {
@@ -566,8 +601,8 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
         ScoreManager.AddPoints(20);             // Player earns 20 points for dropping cards into foundation stacks
         c.AdjustLocation(0, 0);
         c.PicBox.BringToFront();
-        c.IsIn = null;
-        Game.checkWin();
+        c.IsIn = null; //card is no longer in a tableau stack
+        Game.checkWin(); //after placed check to see if board is empty
         //c.Foundation = this;
     }
 
@@ -590,14 +625,14 @@ public class FoundationStack : IFindMoveableCards, IDropTarget, IDragFrom
 
 public static class Game
 {
-    public static Form TitleForm { get; set; }
-    public static Form RoundForm { get; set; }
+    public static Form TitleForm { get; set; } //grab the instance for the title form
+    public static Form RoundForm { get; set; } //grab the instance for the round form
     public static Deck Deck { get; private set; }
     public static Dictionary<Suit, FoundationStack> FoundationStacks { get; set; }
     public static TableauStack[] TableauStacks;
     public static Talon Talon { get; set; }
-    public static int StockReloadCount { get; set; }
-    public static Card WildCard = null;
+    public static int StockReloadCount { get; set; } //counter for how many times the deck has been refreshed
+    public static Card WildCard = null; //flag for if a wildcard is in play
 
 
     static Game()
@@ -605,6 +640,12 @@ public static class Game
         StockReloadCount = 0;
     }
 
+    /// <summary>
+    /// Initialises the game's structures, and deals cards.
+    /// </summary>
+    /// <param name="panTalon"></param>
+    /// <param name="panTableauStacks"></param>
+    /// <param name="panFoundationStacks"></param>
     public static void Init(Panel panTalon, Panel[] panTableauStacks, Dictionary<Suit, Panel> panFoundationStacks)
     {
         Deck = new();
@@ -632,6 +673,7 @@ public static class Game
         for (int i = 0; i < TableauStacks.Length; i++)
         {
             Card c;
+            //based on what tableau it is, add the required amount of cards
             for (int j = 0; j < i; j++)
             {
                 c = Deck.Acquire();
@@ -639,12 +681,19 @@ public static class Game
                 c.AdjustLocation(0, j * VERT_OFFSET);
                 TableauStacks[i].AddCard(c);
             }
+
+            //dont flip the last card
             c = Deck.Acquire();
             c.AdjustLocation(0, i * VERT_OFFSET);
             TableauStacks[i].AddCard(c);
         }
     }
 
+    /// <summary>
+    /// Iterates through the game's structures to see if the card is contained in their list of moveable cards.
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns>true or false</returns>
     public static bool IsCardMovable(Card c)
     {
         bool isMovable = false;
@@ -660,6 +709,11 @@ public static class Game
         return isMovable;
     }
 
+    /// <summary>
+    /// Find where the card is being dragged from.
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     public static IDragFrom FindDragFrom(Card c)
     {
         if (Talon.Cards.Contains(c))
@@ -683,6 +737,11 @@ public static class Game
         return null;
     }
 
+    /// <summary>
+    /// Find which of the game's structures match the control.
+    /// </summary>
+    /// <param name="c"></param>
+    /// <returns></returns>
     public static IDropTarget FindDropTarget(Control c)
     {
         foreach (var foundationStack in FoundationStacks)
@@ -702,6 +761,9 @@ public static class Game
         return null;
     }
 
+    /// <summary>
+    /// Calls all structure DragEnded() methods to eliminate lingering highlights.
+    /// </summary>
     public static void CallDragEndedOnAll()
     {
         foreach (var foundationStack in FoundationStacks)
@@ -714,6 +776,7 @@ public static class Game
         }
     }
 
+    //if card does not have a card below it then return true
     public static bool CanFlipOver(Card c)
     {
         foreach (var tableauStack in TableauStacks)
@@ -726,6 +789,9 @@ public static class Game
         return false;
     }
 
+    /// <summary>
+    /// Checks if all cards are in the foundations to determine if win is achieved.
+    /// </summary>
     public static void checkWin()
     {
         foreach (TableauStack t in TableauStacks)
@@ -741,8 +807,12 @@ public static class Game
             return;
         }
 
-        FrmGame.EndOfRound(true);
+        FrmGame.EndOfRound(true); //opens the end of round form
     }
+
+    /// <summary>
+    /// Causes all cards to drift across the screen at varying speeds.
+    /// </summary>
     public static void Explode()
     {
         List<Card> allCardsInPlay = new();
