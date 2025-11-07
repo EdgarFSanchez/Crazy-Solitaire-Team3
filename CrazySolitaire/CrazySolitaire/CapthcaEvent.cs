@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CrazySolitaire.Properties;
+using System;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Windows.Forms;
 
 namespace CrazySolitaire
@@ -62,6 +64,9 @@ namespace CrazySolitaire
             _label = new Label { AutoSize = false, Dock = DockStyle.Top, Height = 60, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Segoe UI", 18, FontStyle.Bold) };
             _tb = new TextBox { Dock = DockStyle.Top, Font = new Font("Consolas", 16) };
             var hint = new Label { AutoSize = false, Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter, Font = new Font("Segoe UI", 10), Text = "Type the code exactly. Reward if correct; penalty if wrong or time runs out." };
+
+            var player = new SoundPlayer(Resources.knock);
+            player.Play();
 
             inner.Controls.Add(hint);
             inner.Controls.Add(_tb);

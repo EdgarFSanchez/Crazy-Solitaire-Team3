@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CrazySolitaire.Properties;
+using System;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace CrazySolitaire
@@ -62,6 +64,8 @@ namespace CrazySolitaire
                 }
             };
             _timer.Start();
+            var player = new SoundPlayer(Resources.shake);
+            player.Play();
         }
 
         /// <summary>

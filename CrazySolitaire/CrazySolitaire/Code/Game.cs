@@ -1,5 +1,6 @@
 ﻿using CrazySolitaire.Properties;
 using System;
+using System.Media;
 using Timer = System.Windows.Forms.Timer;
 
 namespace CrazySolitaire;
@@ -158,6 +159,9 @@ public class Card
             {
                 FlipOver();
                 ScoreManager.AddPoints(5);      // Reward player 5 points when the flip over a card
+
+                var player = new SoundPlayer(Resources.flip);   
+                player.Play();
             }
         };
 
