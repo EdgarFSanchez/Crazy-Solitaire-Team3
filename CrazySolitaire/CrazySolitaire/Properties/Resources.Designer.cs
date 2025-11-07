@@ -521,6 +521,15 @@ namespace CrazySolitaire.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream flip {
+            get {
+                return ResourceManager.GetStream("flip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap FoundationStackBg_Clubs {
@@ -661,6 +670,15 @@ namespace CrazySolitaire.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream knock {
+            get {
+                return ResourceManager.GetStream("knock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap latest1 {
@@ -737,6 +755,15 @@ namespace CrazySolitaire.Properties {
             get {
                 object obj = ResourceManager.GetObject("red_joker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        public static System.IO.UnmanagedMemoryStream shake {
+            get {
+                return ResourceManager.GetStream("shake", resourceCulture);
             }
         }
         
